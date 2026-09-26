@@ -1,0 +1,643 @@
+<html class="light" lang="en"><head></head><body class="font-body-md text-on-background overflow-x-hidden">```html
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "primary": "#002a5d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#501a00",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0d458d",
+                        "surface-container-high": "#e4e8f6",
+                        "on-surface-variant": "#434751",
+                        "surface": "#f9f9ff",
+                        "on-surface": "#171c25",
+                        "on-tertiary-container": "#fb9263",
+                        "surface-tint": "#305da6",
+                        "on-tertiary-fixed": "#360f00",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-fixed": "#d7e2ff",
+                        "outline": "#737782",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#ecf0fe",
+                        "secondary-container": "#659dfe",
+                        "secondary": "#115cb9",
+                        "surface-container": "#e9eefc",
+                        "primary-container": "#003f87",
+                        "on-secondary-fixed": "#001a40",
+                        "on-secondary-container": "#003370",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-secondary-fixed-variant": "#004491",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#acc7ff",
+                        "outline-variant": "#c3c6d2",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#171c25",
+                        "surface-variant": "#dee2f0",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2b303b",
+                        "primary-fixed": "#d7e2ff",
+                        "on-primary-fixed": "#001a40",
+                        "tertiary-fixed-dim": "#ffb597",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#84adfc",
+                        "surface-bright": "#f9f9ff",
+                        "surface-dim": "#d5dae7",
+                        "on-tertiary-fixed-variant": "#7a2f07",
+                        "surface-container-highest": "#dee2f0",
+                        "tertiary-container": "#732a02",
+                        "inverse-primary": "#acc7ff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "container-max-width": "1440px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "base": "8px"
+                },
+                "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                },
+                "fontSize": {
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}]
+                }
+              },
+            },
+          }
+        </script>
+<style>
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(195, 198, 210, 0.45);
+            box-shadow: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+            min-height: 100vh;
+        }
+        .nav-link-active {
+            color: #002a5d;
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-link-active::after {
+            content: '';
+            position: absolute;
+            bottom: -28px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #002a5d;
+        }
+        .modal-backdrop {
+            background: rgba(0, 42, 93, 0.2);
+            backdrop-filter: blur(8px);
+            transition: opacity 0.3s ease-out;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-open .modal-content {
+            transform: scale(1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: #ba1a1a;
+        }
+    </style>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-white/40 h-20">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex items-center justify-between h-full">
+<div class="flex items-center gap-stack-lg">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Lost & Found Items</span>
+<div class="hidden md:flex gap-stack-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Home.html">Home</a>
+<a class="font-body-md text-body-md nav-link-active" href="Items&search.html">Search</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Reportlost.html">Report Lost</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Reportfound.html">Report Found</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="userdash.html">Dashboard</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-body-sm w-64" placeholder="Quick search..." type="text"/>
+</div>
+<button onclick="window.location.href='Login.html'" class="material-symbols-outlined text-primary p-2 hover:bg-white/40 rounded-full transition-all">account_circle</button>
+</div>
+</div>
+</nav>
+<main class="pt-28 pb-stack-lg max-w-container-max-width mx-auto px-margin-desktop">
+<!-- Search & Filter Section -->
+<section class="glass-card rounded-xl p-8 mb-stack-lg">
+<div class="flex flex-col gap-6">
+<h1 class="font-headline-md text-headline-md text-primary">Find Items</h1>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="md:col-span-4 lg:col-span-2 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Search for office, college, or hospital gear..." type="text"/>
+</div>
+<div>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none appearance-none cursor-pointer">
+<option value="">All Status</option>
+<option value="lost">Lost</option>
+<option value="found">Found</option>
+</select>
+</div>
+<div>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none appearance-none cursor-pointer">
+<option value="">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="bags">Bags &amp; Luggage</option>
+<option value="documents">IDs &amp; Documents</option>
+<option value="stationery">Stationery &amp; Study</option>
+<option value="hospital">Hospital</option>
+</select>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white px-6 py-3 rounded-lg font-label-lg hover:bg-primary-container transition-all flex-1">Apply Filters</button>
+<button class="border border-outline-variant text-on-surface-variant px-3 py-3 rounded-lg hover:bg-white/50 transition-all material-symbols-outlined">tune</button>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider mr-2">Quick Filters:</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Laptop</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Stethoscope</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#IDCard</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Calculator</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Headphones</span>
+</div>
+</div>
+</section>
+<!-- Item Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-gutter" id="item-grid">
+<!-- JS will populate these -->
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-4" id="pagination-container">
+<!-- JS will populate pagination -->
+</div>
+</main>
+<!-- Claim Modal -->
+<div class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4" id="claim-modal">
+<div class="absolute inset-0 modal-backdrop" id="modal-overlay"></div>
+<div class="relative bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden modal-content border border-white/40">
+<button class="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors material-symbols-outlined text-outline" id="close-modal">close</button>
+<div class="flex flex-col md:flex-row h-full max-h-[95vh]">
+<!-- Left Side: Image & Info -->
+<div class="w-full md:w-5/12 h-64 md:h-auto border-r border-outline-variant/20 flex flex-col">
+<div class="h-1/2 relative bg-surface-container-low overflow-hidden">
+<img alt="Item image" class="w-full h-full object-cover" id="modal-img"/>
+<div class="hidden absolute inset-0 flex items-center justify-center bg-surface-container-low text-primary" id="modal-img-fallback">
+<span class="material-symbols-outlined text-6xl">inventory_2</span>
+</div>
+</div>
+<div class="p-6 space-y-4 flex-grow bg-white/30">
+<div>
+<span class="px-3 py-1 rounded-full text-label-sm font-bold bg-secondary/10 text-secondary border border-secondary/20" id="modal-status-badge">Found</span>
+<h2 class="mt-3 font-headline-md text-headline-md text-primary leading-tight" id="modal-title">Item Name</h2>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">category</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Category</p>
+<p class="text-body-sm font-medium" id="modal-cat">Category Name</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Location</p>
+<p class="text-body-sm font-medium" id="modal-loc">Location Details</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Reported On</p>
+<p class="text-body-sm font-medium" id="modal-date">Date, Year</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Form -->
+<div class="w-full md:w-7/12 p-8 flex flex-col overflow-y-auto" id="modal-form-container">
+<div id="form-content">
+<div class="mb-6">
+<h3 class="text-headline-sm font-bold text-primary">Claim Details</h3>
+<p class="text-body-sm text-on-surface-variant">Please provide your contact information to proceed with the claim.</p>
+</div>
+<form class="space-y-5" id="claim-form">
+<input id="claim-item-id" name="item_id" type="hidden"/>
+<input id="claim-item-type" name="item_type" type="hidden"/>
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-name">Full Name <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-name" placeholder="John Doe" required="" type="text"/>
+<p class="text-error text-label-sm hidden" id="err-name">Please enter your full name.</p>
+</div>
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-phone">Phone Number <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-phone" placeholder="+91 00000 00000" required="" type="tel"/>
+<p class="text-error text-label-sm hidden" id="err-phone">Please enter a valid 10-digit phone number.</p>
+</div>
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-email">Email Address <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-email" placeholder="john@example.com" required="" type="email"/>
+<p class="text-error text-label-sm hidden" id="err-email">Please enter a valid email address.</p>
+</div>
+<div class="bg-error-container/30 p-3 rounded-lg hidden" id="general-error">
+<p class="text-error text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                            Please fill in all required fields before submitting your claim.
+                        </p>
+</div>
+<div class="pt-4 flex gap-4" id="modal-actions">
+<button class="flex-1 bg-primary text-white py-3.5 rounded-xl font-label-lg hover:bg-primary-container disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-primary/10" disabled="" id="confirm-claim" type="button">Confirm Claim</button>
+<button class="px-6 border border-outline-variant text-on-surface-variant py-3.5 rounded-xl font-label-lg hover:bg-surface-container transition-all" id="cancel-claim" type="button">Cancel</button>
+</div>
+</form>
+</div>
+<!-- Success Message (Initially Hidden) -->
+<div class="hidden flex flex-col items-center justify-center h-full text-center py-12 animate-fade-in" id="success-message">
+<div class="w-20 h-20 bg-tertiary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-5xl">verified</span>
+</div>
+<h3 class="text-headline-md text-primary mb-2">Request Submitted</h3>
+<p class="text-body-lg text-on-surface-variant max-w-sm mb-8">
+                        Claim Request Submitted Successfully. Please wait for admin approval.
+                    </p>
+<div class="px-6 py-4 bg-tertiary-fixed rounded-2xl border border-tertiary-fixed-dim/30">
+<p class="text-tertiary font-bold font-label-lg flex items-center gap-2">
+<span class="material-symbols-outlined">pending_actions</span>
+                            Current Status: Pending Approval
+                        </p>
+</div>
+<button class="mt-10 text-primary font-label-lg hover:underline" id="close-success-modal" type="button">Back to Search</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-12 mt-16 border-t border-outline-variant/30">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-4">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Founder</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs leading-relaxed">The dedicated Lost &amp; Found platform for modern office hubs, academic institutions, and medical facilities.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-label-lg text-primary uppercase tracking-wider">Help &amp; Support</h4>
+<div class="flex flex-col gap-3">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Use</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-label-lg text-primary uppercase tracking-wider">Connect</h4>
+<div class="flex flex-col gap-2">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                    help@founder.com
+                </p>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-4">© 2024 Founder Lost &amp; Found.</p>
+</div>
+</div>
+</footer>
+<script>
+  window.__SEARCH_ITEMS__ = {{ items|tojson }};
+  window.__CURRENT_USER__ = {{ current_user|tojson }};
+</script>
+<script>
+  const allItems = Array.isArray(window.__SEARCH_ITEMS__) ? window.__SEARCH_ITEMS__ : [];
+  const currentUser = window.__CURRENT_USER__ || null;
+  const itemsPerPage = 9;
+  let currentPage = 1;
+  let filteredItems = [...allItems];
+  let activeClaimItem = null;
+
+  const grid = document.getElementById('item-grid');
+  const pagination = document.getElementById('pagination-container');
+  const modal = document.getElementById('claim-modal');
+  const overlay = document.getElementById('modal-overlay');
+  const formContent = document.getElementById('form-content');
+  const successMessage = document.getElementById('success-message');
+  const confirmBtn = document.getElementById('confirm-claim');
+  const closeModal = document.getElementById('close-modal');
+  const cancelClaim = document.getElementById('cancel-claim');
+  const closeSuccess = document.getElementById('close-success-modal');
+  const claimForm = document.getElementById('claim-form');
+  const claimName = document.getElementById('claim-name');
+  const claimPhone = document.getElementById('claim-phone');
+  const claimEmail = document.getElementById('claim-email');
+  const generalError = document.getElementById('general-error');
+  const errName = document.getElementById('err-name');
+  const errPhone = document.getElementById('err-phone');
+  const errEmail = document.getElementById('err-email');
+  const itemIdField = document.getElementById('claim-item-id');
+  const itemTypeField = document.getElementById('claim-item-type');
+
+  function normalized(value) {
+    return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function imageSrc(item = {}) {
+    if (item.photo && String(item.photo).startsWith('data:')) return item.photo;
+    if (item.photo && String(item.photo).startsWith('http')) return item.photo;
+    if (item.photo && String(item.photo).startsWith('assets/')) return `/${item.photo}`;
+    const key = `${normalized(item.item_name)} ${normalized(item.category)}`;
+    if (key.includes('laptop') || key.includes('phone') || key.includes('airpods') || key.includes('calculator')) return 'assets/images/electronics.svg';
+    if (key.includes('document') || key.includes('id')) return 'assets/images/documents.svg';
+    if (key.includes('bag') || key.includes('wallet') || key.includes('briefcase')) return 'assets/images/office.svg';
+    if (key.includes('study') || key.includes('book') || key.includes('textbook')) return 'assets/images/study.svg';
+    return item.item_type === 'lost' ? 'assets/images/hero-found.svg' : 'assets/images/map.svg';
+  }
+
+  function renderItemCard(item) {
+    const loggedInUser = currentUser && currentUser.id;
+    const claimButton = item.item_type === 'found'
+      ? (loggedInUser
+        ? `<button class="bg-primary text-white px-4 py-2 rounded-lg text-label-md hover:bg-primary-container transition-colors claim-trigger" type="button" data-item-id="${item.id}" data-item-type="found">Claim Item</button>`
+        : `<a href="Login.html" class="bg-primary text-white px-4 py-2 rounded-lg text-label-md hover:bg-primary-container transition-colors" type="button">Login to Claim</a>`)
+      : `<span class="text-label-sm text-outline px-4 py-2">Lost report</span>`;
+
+    return `
+      <article class="glass-card rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+        <div class="h-52 relative overflow-hidden bg-surface-container-low">
+          <img src="${imageSrc(item)}" alt="${String(item.item_name || '').replace(/"/g, '&quot;')}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+          <div class="absolute top-4 left-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full ${item.item_type === 'found' ? 'bg-secondary/90' : 'bg-primary/90'} text-white text-label-sm font-semibold backdrop-blur-md">${item.item_type === 'found' ? 'Found' : 'Lost'}</span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-primary">${item.item_name || ''}</h3>
+              <p class="text-body-sm text-on-surface-variant mt-1">${item.category || ''}</p>
+            </div>
+            <span class="material-symbols-outlined text-outline">inventory_2</span>
+          </div>
+          <div class="space-y-2 text-body-sm text-on-surface-variant">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-primary">location_on</span>
+              <span>${item.location || ''}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+              <span>${item.item_date || ''}</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-3 pt-2 border-t border-outline-variant/20">
+            <span class="text-label-sm text-outline">Reported by ${item.reporter_name || 'Community Member'}</span>
+            ${claimButton}
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderItems() {
+    if (!grid) return;
+    const start = (currentPage - 1) * itemsPerPage;
+    const pageItems = filteredItems.slice(start, start + itemsPerPage);
+    grid.innerHTML = pageItems.length
+      ? pageItems.map(renderItemCard).join('')
+      : '<div class="col-span-full py-16 text-center text-on-surface-variant"><span class="material-symbols-outlined text-5xl mb-3 text-outline">search_off</span><p>No items match the current filters.</p></div>';
+
+    grid.querySelectorAll('.claim-trigger').forEach((button) => {
+      button.addEventListener('click', () => openClaimModal(button.dataset.itemId, button.dataset.itemType));
+    });
+  }
+
+  function renderPagination() {
+    if (!pagination) return;
+    const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+    pagination.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.className = 'px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low';
+    prev.textContent = 'Previous';
+    prev.disabled = currentPage === 1;
+    prev.onclick = () => {
+      if (currentPage > 1) {
+        currentPage -= 1;
+        renderItems();
+        renderPagination();
+      }
+    };
+    pagination.appendChild(prev);
+
+    const pageList = document.createElement('div');
+    pageList.className = 'flex gap-2';
+    for (let i = 1; i <= totalPages; i += 1) {
+      const button = document.createElement('button');
+      const active = i === currentPage;
+      button.className = `w-10 h-10 rounded-lg border ${active ? 'bg-primary text-white border-primary' : 'border-outline-variant text-on-surface-variant hover:bg-surface-container-low'}`;
+      button.textContent = i;
+      button.onclick = () => {
+        currentPage = i;
+        renderItems();
+        renderPagination();
+      };
+      pageList.appendChild(button);
+    }
+    pagination.appendChild(pageList);
+
+    const next = document.createElement('button');
+    next.className = 'px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low';
+    next.textContent = 'Next';
+    next.disabled = currentPage === totalPages;
+    next.onclick = () => {
+      if (currentPage < totalPages) {
+        currentPage += 1;
+        renderItems();
+        renderPagination();
+      }
+    };
+    pagination.appendChild(next);
+  }
+
+  function validateClaimForm() {
+    const nameOk = (claimName.value || '').trim().length > 1;
+    const cleanPhone = (claimPhone.value || '').replace(/\D/g, '');
+    const phoneOk = cleanPhone.length >= 10;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((claimEmail.value || '').trim());
+    errName.classList.toggle('hidden', nameOk);
+    errPhone.classList.toggle('hidden', phoneOk);
+    errEmail.classList.toggle('hidden', emailOk);
+    generalError.classList.toggle('hidden', nameOk && phoneOk && emailOk);
+    confirmBtn.disabled = !(nameOk && phoneOk && emailOk);
+    return nameOk && phoneOk && emailOk;
+  }
+
+  function openClaimModal(itemId, itemType) {
+    activeClaimItem = allItems.find((item) => String(item.id) === String(itemId) && item.item_type === itemType) || null;
+    if (!activeClaimItem) return;
+    modal.classList.remove('hidden');
+    formContent.classList.remove('hidden');
+    successMessage.classList.add('hidden');
+    claimForm.reset();
+    if (currentUser) {
+      claimName.value = currentUser.name || '';
+      claimPhone.value = currentUser.phone || '';
+      claimEmail.value = currentUser.email || '';
+    }
+    document.getElementById('modal-title').textContent = activeClaimItem.item_name || '';
+    document.getElementById('modal-cat').textContent = activeClaimItem.category || '';
+    document.getElementById('modal-loc').textContent = activeClaimItem.location || '';
+    document.getElementById('modal-date').textContent = activeClaimItem.item_date || '';
+    document.getElementById('modal-img').src = imageSrc(activeClaimItem);
+    document.getElementById('modal-img').classList.remove('hidden');
+    document.getElementById('modal-img-fallback').classList.add('hidden');
+    document.getElementById('modal-status-badge').textContent = activeClaimItem.item_type === 'found' ? 'Found' : 'Lost';
+    itemIdField.value = activeClaimItem.id;
+    itemTypeField.value = activeClaimItem.item_type;
+    validateClaimForm();
+  }
+
+  function closeClaimModal() {
+    modal.classList.add('hidden');
+    activeClaimItem = null;
+  }
+
+  async function submitClaim() {
+    if (!validateClaimForm() || !activeClaimItem) return;
+    const body = new URLSearchParams({
+      item_id: String(activeClaimItem.id),
+      item_type: activeClaimItem.item_type,
+      message: `Claim request for ${activeClaimItem.item_name}`,
+      claim_name: claimName.value.trim(),
+      claim_phone: claimPhone.value.trim(),
+      claim_email: claimEmail.value.trim(),
+    });
+    try {
+      const response = await fetch('/claim', {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'fetch' },
+        body,
+      });
+      const data = await response.json();
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || 'Claim submission failed.');
+      }
+      formContent.classList.add('hidden');
+      successMessage.classList.remove('hidden');
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  function applyFilters() {
+    const filterSection = document.querySelector('section.glass-card');
+    const searchInput = filterSection?.querySelector('input[placeholder*="Search"]');
+    const selects = filterSection?.querySelectorAll('select') || [];
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const status = selects[0]?.value || '';
+    const category = selects[1]?.value || '';
+    filteredItems = allItems.filter((item) => {
+      const haystack = `${item.item_name || ''} ${item.category || ''} ${item.description || ''} ${item.location || ''}`.toLowerCase();
+      const matchesQuery = !query || haystack.includes(query);
+      const matchesStatus = !status || item.item_type === status;
+      const matchesCategory = !category || (item.category || '').toLowerCase().includes(category);
+      return matchesQuery && matchesStatus && matchesCategory;
+    });
+    currentPage = 1;
+    renderItems();
+    renderPagination();
+  }
+
+  const filterSection = document.querySelector('section.glass-card');
+  const searchInput = filterSection?.querySelector('input[placeholder*="Search"]');
+  const applyFiltersBtn = Array.from(filterSection?.querySelectorAll('button') || []).find((button) => button.textContent.trim() === 'Apply Filters');
+  const resetFiltersBtn = Array.from(filterSection?.querySelectorAll('button') || []).find((button) => button.textContent.trim() === 'tune');
+
+  applyFiltersBtn?.addEventListener('click', applyFilters);
+  resetFiltersBtn?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    (filterSection?.querySelectorAll('select') || []).forEach((select) => { select.value = ''; });
+    applyFilters();
+  });
+  searchInput?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      applyFilters();
+    }
+  });
+  document.querySelectorAll('.search-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      if (searchInput) searchInput.value = chip.textContent.trim();
+      applyFilters();
+    });
+  });
+
+  claimName.addEventListener('input', validateClaimForm);
+  claimPhone.addEventListener('input', validateClaimForm);
+  claimEmail.addEventListener('input', validateClaimForm);
+  confirmBtn.addEventListener('click', submitClaim);
+  closeModal?.addEventListener('click', closeClaimModal);
+  cancelClaim?.addEventListener('click', closeClaimModal);
+  overlay?.addEventListener('click', closeClaimModal);
+  closeSuccess?.addEventListener('click', closeClaimModal);
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('q') && searchInput) searchInput.value = params.get('q');
+
+  applyFilters();
+</script>
+</body></html>

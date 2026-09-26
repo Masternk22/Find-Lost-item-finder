@@ -1,0 +1,935 @@
+<!DOCTYPE html><html class="light" lang="en" style="width: 1280px; height: 1170px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lost &amp; Found Items</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid rgba(222, 226, 240, 0.5);
+            box-shadow: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background-color: #e9eefc;
+            color: #002a5d;
+            font-weight: 600;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #dee2f0;
+            border-radius: 10px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .managed-items-scroll {
+            max-height: 60vh;
+            overflow: auto;
+        }
+        .managed-items-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .managed-items-scroll::-webkit-scrollbar-track {
+            background: #f0f3ff;
+            border-radius: 9999px;
+        }
+        .managed-items-scroll::-webkit-scrollbar-thumb {
+            background: #acc7ff;
+            border-radius: 9999px;
+        }
+        .managed-items-scroll thead {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#e9eefc",
+                      "outline": "#737782",
+                      "tertiary-fixed-dim": "#ffb597",
+                      "primary-container": "#003f87",
+                      "on-background": "#171c25",
+                      "on-tertiary-fixed-variant": "#7a2f07",
+                      "on-secondary-fixed": "#001a40",
+                      "inverse-on-surface": "#ecf0fe",
+                      "primary-fixed": "#d7e2ff",
+                      "secondary": "#115cb9",
+                      "primary-fixed-dim": "#acc7ff",
+                      "tertiary": "#501a00",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#84adfc",
+                      "on-tertiary-fixed": "#360f00",
+                      "surface-tint": "#305da6",
+                      "on-primary-fixed-variant": "#0d458d",
+                      "on-secondary-container": "#003370",
+                      "tertiary-container": "#732a02",
+                      "surface-variant": "#dee2f0",
+                      "surface-dim": "#d5dae7",
+                      "on-error": "#ffffff",
+                      "on-surface": "#171c25",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#659dfe",
+                      "background": "#f9f9ff",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-primary-fixed": "#001a40",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f0f3ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#dee2f0",
+                      "surface-bright": "#f9f9ff",
+                      "surface": "#f9f9ff",
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-primary": "#ffffff",
+                      "primary": "#002a5d",
+                      "inverse-primary": "#acc7ff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#fb9263",
+                      "inverse-surface": "#2b303b",
+                      "on-surface-variant": "#434751",
+                      "on-secondary-fixed-variant": "#004491",
+                      "secondary-fixed-dim": "#acc7ff",
+                      "outline-variant": "#c3c6d2",
+                      "surface-container-high": "#e4e8f6",
+                      "surface-container-lowest": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "container-max-width": "1440px",
+                      "margin-mobile": "16px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface"><nav class="fixed top-0 w-full z-50 glass-nav h-20 bg-white/60 backdrop-blur-[20px] border-b border-white/80"><div class="max-w-container-max-width mx-auto px-margin-desktop flex items-center justify-between h-full"><div class="flex items-center gap-12"><span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">Founder</span><div class="hidden md:flex gap-8 items-center h-full"><a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="Home.html">Home</a> <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="Items&search.html">Search</a> <a class="font-label-lg text-primary relative h-full flex items-center after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="Admindash.html">Dashboard</a></div></div><div class="flex items-center gap-6"><div class="hidden lg:flex relative"><input class="bg-surface-container-low border-none rounded-full px-6 py-2 focus:ring-2 focus:ring-primary/20 w-64 text-body-sm transition-all placeholder:text-outline" placeholder="Search items..." type="text"> <span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span></div><a class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container font-bold text-label-lg hover:brightness-110 transition-all active:scale-95 shadow-sm" href="Login.html">A</a></div></div></nav>
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 h-screen w-64 bg-white border-r border-outline-variant/30 flex flex-col z-40 top-20" style="height: calc(100vh - 5rem);">
+<div class="p-6">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">Admin Panel</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Management Console</p>
+</div>
+<nav class="flex-grow px-4 space-y-1" id="main-nav">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 nav-link active-nav-item" data-target="overview-view" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low rounded-lg transition-all duration-200 nav-link text-on-surface-variant" data-target="user-management-view" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg text-label-lg">User Accounts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low rounded-lg transition-all duration-200 nav-link text-on-surface-variant" data-target="manage-items-view" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-lg text-label-lg">Manage Items</span>
+</a><a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low rounded-lg transition-all duration-200 nav-link text-on-surface-variant" data-target="reported-view" href="#">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+<span class="font-label-lg text-label-lg">Reported</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low rounded-lg transition-all duration-200 nav-link text-on-surface-variant" data-target="claimed-view" href="#">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="font-label-lg text-label-lg">Claimed</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low rounded-lg transition-all duration-200 nav-link text-on-surface-variant" data-target="reviews-view" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span class="font-label-lg text-label-lg">Reviews</span>
+</a>
+</nav>
+<div class="p-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-3 mt-2 text-error hover:bg-error-container/10 rounded-lg transition-colors group" href="/logout">
+<span class="material-symbols-outlined group-hover:translate-x-0.5 transition-transform" data-icon="logout">logout</span>
+<span class="font-label-lg text-label-lg">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen bg-[#f9f9ff] pt-20 px-margin-desktop pb-margin-desktop">
+<!-- Header -->
+<header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-stack-lg">
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center justify-center w-11 h-11 rounded-lg border border-outline-variant/30 bg-white text-primary hover:bg-surface-container-low liquid-transition" href="Home.html" aria-label="Back to home">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</a>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface" id="view-title">Dashboard Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant" id="view-subtitle">Welcome back, Admin. Here's the latest platform activity.</p>
+</div>
+
+</header>
+<!-- Overview View (Default) -->
+<div class="tab-content active" id="overview-view">
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="glass-panel p-5 rounded-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 text-primary rounded-lg">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-secondary font-bold text-label-md bg-secondary-container/10 px-2 py-0.5 rounded">+12%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Total Users</p>
+<h3 class="text-headline-md font-bold text-on-surface">12,840</h3>
+</div>
+<div class="glass-panel p-5 rounded-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error-container/10 text-error rounded-lg">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+</div>
+<span class="text-error font-bold text-label-md bg-error-container/10 px-2 py-0.5 rounded">+5%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Lost Reports</p>
+<h3 class="text-headline-md font-bold text-on-surface">2,412</h3>
+</div>
+<div class="glass-panel p-5 rounded-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container/10 text-secondary rounded-lg">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+</div>
+<span class="text-secondary font-bold text-label-md bg-secondary-container/10 px-2 py-0.5 rounded">+18%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Found Reports</p>
+<h3 class="text-headline-md font-bold text-on-surface">1,890</h3>
+</div>
+<div class="glass-panel p-5 rounded-lg transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<span class="text-on-tertiary-fixed-variant font-bold text-label-md bg-tertiary-fixed/30 px-2 py-0.5 rounded">84%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Resolved Claims</p>
+<h3 class="text-headline-md font-bold text-on-surface">1,580</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Pending Claims Management -->
+<section class="lg:col-span-2 glass-panel rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 flex justify-between items-center border-b border-outline-variant/20">
+<h3 class="font-headline-sm text-headline-sm text-primary">Recent Claims for Approval</h3>
+<button onclick="window.location.href='Items&search.html'" class="text-secondary font-label-lg hover:bg-secondary-container/10 px-3 py-1 rounded transition-colors">View All</button>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<!-- Claim Item 1 -->
+<div class="p-6 flex items-center gap-6 hover:bg-surface-container-low transition-colors">
+<div class="w-20 h-20 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden border border-outline-variant/30">
+<img alt="Lost Watch" class="w-full h-full object-cover" src="assets/images/accessories.svg">
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface text-lg">Premium Apple Watch S9</h4>
+<p class="text-body-sm text-on-surface-variant mt-1">Claimed by <span class="text-primary font-medium">John Doe</span> • 2 hours ago</p>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full bg-secondary-container/10 text-secondary text-label-sm font-semibold border border-secondary/10">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified_user">verified_user</span>
+                                Matches Location
+                            </span>
+</div>
+<div class="flex gap-2">
+<button class="px-5 py-2 border border-outline-variant text-on-surface-variant font-label-lg rounded-lg hover:bg-surface-container-low transition-all">Reject</button>
+<button class="px-5 py-2 bg-primary text-white font-label-lg rounded-lg hover:bg-primary-container transition-all shadow-sm">Approve</button>
+</div>
+</div>
+<!-- Claim Item 2 -->
+<div class="p-6 flex items-center gap-6 hover:bg-surface-container-low transition-colors">
+<div class="w-20 h-20 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden border border-outline-variant/30">
+<img alt="Lost Wallet" class="w-full h-full object-cover" src="assets/images/accessories.svg">
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface text-lg">Brown Leather Wallet</h4>
+<p class="text-body-sm text-on-surface-variant mt-1">Claimed by <span class="text-primary font-medium">Sarah Jenkins</span> • 5 hours ago</p>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-sm font-semibold border border-tertiary-fixed-dim/20">
+<span class="material-symbols-outlined text-[16px]" data-icon="contact_support">contact_support</span>
+                                Pending Verification
+                            </span>
+</div>
+<div class="flex gap-2">
+<button class="px-5 py-2 border border-outline-variant text-on-surface-variant font-label-lg rounded-lg hover:bg-surface-container-low transition-all">Reject</button>
+<button class="px-5 py-2 bg-primary text-white font-label-lg rounded-lg hover:bg-primary-container transition-all shadow-sm">Approve</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Logs Section -->
+
+</div>
+</div>
+<!-- Reported/Claimed View (Simulated via Tabs) -->
+<div class="tab-content" id="reported-view">
+<div class="flex gap-gutter border-b border-outline-variant/30 mb-8">
+<button class="pb-4 px-2 font-bold text-primary border-b-2 border-primary relative">
+            Manage Found Items
+            <span class="absolute -top-1 -right-2 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">124</span>
+</button>
+<button class="pb-4 px-2 font-medium text-on-surface-variant hover:text-primary transition-colors">Manage Lost Items</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Item Card 1 -->
+<div class="glass-panel rounded-lg group overflow-hidden transition-all">
+<div class="h-44 relative overflow-hidden">
+<img alt="iPhone 13" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="assets/images/electronics.svg">
+<div class="absolute top-3 right-3">
+<span class="bg-primary/90 backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-md uppercase font-bold tracking-wider shadow-sm">Found</span>
+</div>
+</div>
+<div class="p-4">
+<h5 class="font-label-lg text-on-surface text-base truncate">iPhone 13 - Midnight</h5>
+<p class="text-label-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                    Lobby Cafe
+                                </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="text-label-sm text-outline">Dec 14, 2024</span>
+<div class="flex gap-1">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Placeholder Views -->
+<div class="tab-content" id="user-management-view">
+<div class="glass-panel p-12 rounded-xl text-center">
+<span class="material-symbols-outlined text-6xl text-outline mb-4" data-icon="group">group</span>
+<h3 class="text-headline-sm font-bold text-on-surface">User Management</h3>
+<p class="text-on-surface-variant mt-2">Displaying all 12,840 registered users.</p>
+</div>
+</div>
+<div class="tab-content" id="claimed-view">
+<div class="glass-panel p-12 rounded-xl text-center">
+<span class="material-symbols-outlined text-6xl text-outline mb-4" data-icon="fact_check">fact_check</span>
+<h3 class="text-headline-sm font-bold text-on-surface">Claimed History</h3>
+<p class="text-on-surface-variant mt-2">Manage the 1,580 successfully resolved claims.</p>
+</div>
+</div>
+<!-- Reviews Panel View -->
+<div class="tab-content" id="manage-items-view"><div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-stack-lg"><div class="glass-panel p-6 rounded-xl flex items-center gap-6"><div class="p-4 bg-primary/5 text-primary rounded-2xl"><span class="material-symbols-outlined text-3xl">inventory_2</span></div><div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Total Listed Items</p><h3 class="text-headline-md font-bold text-on-surface">4,302</h3></div></div><div class="glass-panel p-6 rounded-xl flex items-center gap-6"><div class="p-4 bg-secondary-container/10 text-secondary rounded-2xl"><span class="material-symbols-outlined text-3xl">new_releases</span></div><div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Recently Reported</p><h3 class="text-headline-md font-bold text-on-surface">24</h3><p class="text-label-sm text-outline">In the last 24 hours</p></div></div></div><div class="glass-panel rounded-xl overflow-hidden"><div class="border-b border-outline-variant/20 bg-white"><div class="flex gap-8 px-6 pt-6"><button class="pb-4 px-2 font-bold text-primary border-b-2 border-primary" id="tab-found-items">Found Items (4,120)</button><button class="pb-4 px-2 font-medium text-on-surface-variant hover:text-primary transition-colors" id="tab-lost-items">Lost Items (182)</button></div></div><div class="p-6 bg-white border-b border-outline-variant/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><h3 class="font-headline-sm text-headline-sm text-primary">Inventory List</h3><div class="relative w-full md:w-72"><span class="absolute inset-y-0 left-3 flex items-center text-outline"><span class="material-symbols-outlined text-sm">search</span></span><input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/20 w-full text-body-sm transition-all" placeholder="Filter items..." type="text"></div></div><div class="overflow-x-auto"><table class="w-full text-left border-collapse"><thead class="bg-surface-container-low text-on-surface-variant"><tr><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Item</th><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Category</th><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Reporter</th><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Date</th><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Status</th><th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-right">Actions</th></tr></thead><tbody class="divide-y divide-outline-variant/10 text-body-sm"><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><img alt="Black Laptop Bag" class="w-10 h-10 rounded bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujp_1c1cxrhH7jXpjehi4EE6SL_cC7MJAaqfJBmdgfsEwUstC7F73MRD9KMS4yxWVV6oqTND4EJ3G8HxwA7RBnfQF8cSKOQ99Mmgnq9fo4TlfhALwQKC0S606X4shxaIe6vqO25A9VhG2Pb61liJdJPGa3rXF_wlMd6kMXuWLopSW9H2zBbNNxeVAs_oqT4dPRmaLkCnZHiYhWaKqtgfUzZE_Q_5YbH4vgaKODRNoM1_66PYuSs2s47Hxj5"><span class="font-medium text-on-surface">Black Laptop Bag</span></div></td><td class="px-6 py-4 text-on-surface-variant">Bags &amp; Luggage</td><td class="px-6 py-4 text-on-surface-variant">Marcus Chen</td><td class="px-6 py-4 text-outline">Oct 24, 2024</td><td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-primary-container/10 text-primary-container text-label-sm font-semibold border border-primary/10">Lost</span></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-1"><button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button><button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors"><span class="material-symbols-outlined">delete</span></button></div></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><img alt="Dell Laptop" class="w-10 h-10 rounded bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhSxg_haUyI-rH2yjawANJl4JOXLcZ1PnL50raEdidF4CbKb3IIDJFQ7ig3XBm_az7uPXEbbYGnrG62l-uv1nxchB3JaGvlB0LyQsh3iP1GaNIbz1tNp9PLU0EhNwpOaMu9l29om2KZhSOtrV8ziV-XJTZZfx4KNzx_pyHcAWZtxqlPlZqQe5BRYtAoMaelmHubs5Xjhnw1Aeo-njzExo9SBFOW9dQxGClHj5LqYmmBP5EjsyvYG5tLAfkX"><span class="font-medium text-on-surface">Dell Laptop</span></div></td><td class="px-6 py-4 text-on-surface-variant">Electronics</td><td class="px-6 py-4 text-on-surface-variant">Sarah Jenkins</td><td class="px-6 py-4 text-outline">Oct 23, 2024</td><td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-secondary-container/10 text-secondary text-label-sm font-semibold border border-secondary/10">Found</span></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-1"><button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button><button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors"><span class="material-symbols-outlined">delete</span></button></div></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><img alt="Student ID" class="w-10 h-10 rounded bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uiWhCXFsHfDeF-Pz1et5503FgSdoISe2HmUivuHRqTMhbNzKmgRCveo74NeMKKTptJn2cPzD61NrRJSRySIlCA3PVu77k4mM_DkfiR70_zdX_KswraJcJmC9c-3on7PJ7gKwIddkOM-RAUiElaRdneWYSiKb1wTDExYrzaw1VAAMdx0yeCb6nUtsuYdlEDs62XJzMMZQID4ihOpjSiks86t-jhPpSvvOPW2G8pxdtpGWANu4Vyl8Vxa1PtH"><span class="font-medium text-on-surface">Student ID</span></div></td><td class="px-6 py-4 text-on-surface-variant">Documents</td><td class="px-6 py-4 text-on-surface-variant">David Miller</td><td class="px-6 py-4 text-outline">Oct 22, 2024</td><td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-secondary-container/10 text-secondary text-label-sm font-semibold border border-secondary/10">Found</span></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-1"><button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button><button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors"><span class="material-symbols-outlined">delete</span></button></div></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><img alt="Office Access Card" class="w-10 h-10 rounded bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhWMvUIyY8qTM6zNv-35HrWzK-cjY_HrU1OpUXKWlXshf1o-_QFh_wZ2nb6Dac32KQt7txj3Y6iJ1lLOo833x2AQDJepMU6qHnbuejIysqDxUSJD89nD7trZx5TP9E-NyyJzorL7lylLylvQexjLkfMG7Te2MTqLK2UZf7xGkkVy-seiTN5PGvSQDmxE-Y4vV0K6vFMRyk610OL2JSK-TQUDWgLj_uXnUYGkVNc_ZO_hghIURe9rHpRCOXm"><span class="font-medium text-on-surface">Office Access Card</span></div></td><td class="px-6 py-4 text-on-surface-variant">Documents</td><td class="px-6 py-4 text-on-surface-variant">Emily Chen</td><td class="px-6 py-4 text-outline">Oct 22, 2024</td><td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-primary-container/10 text-primary-container text-label-sm font-semibold border border-primary/10">Lost</span></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-1"><button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button><button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors"><span class="material-symbols-outlined">delete</span></button></div></td></tr><tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4"><div class="flex items-center gap-3"><img alt="Apple AirPods" class="w-10 h-10 rounded bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uiy0q-BZ4LDY-8-ReW86T74WM0tPATx4Clm0S9o-DGuWxIxBt-FJzDn3RPeEmYOMwbENx26z8I9UaJV4xQ75oTnoc3JiKuDIaIrIx_F8_p8qezTEtqKju7gv7a5VRmwTAAjCO2HNvyctaWRssbKHxHUTiUBjWjl6Vzb7quyj4DHlksummg07Evo4L2cNhD_6RRxx1d3AxdNNt8fw0Eg-tCdfwg3ZH5VaJGqMn19l-8hmpj09vlNTz9S5rY"><span class="font-medium text-on-surface">Apple AirPods</span></div></td><td class="px-6 py-4 text-on-surface-variant">Electronics</td><td class="px-6 py-4 text-on-surface-variant">Robert Frost</td><td class="px-6 py-4 text-outline">Oct 20, 2024</td><td class="px-6 py-4"><span class="px-2 py-1 rounded-full bg-secondary-container/10 text-secondary text-label-sm font-semibold border border-secondary/10">Found</span></td><td class="px-6 py-4 text-right"><div class="flex justify-end gap-1"><button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button><button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors"><span class="material-symbols-outlined">delete</span></button></div></td></tr></tbody></table></div><div class="p-6 border-t border-outline-variant/10 bg-white flex justify-between items-center"><p class="text-body-sm text-on-surface-variant">Showing 1 of 4,120 items</p><div class="flex gap-2"><button class="px-4 py-1.5 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">Previous</button><button class="px-4 py-1.5 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors">Next</button></div></div></div></div><div class="tab-content" id="reviews-view">
+<!-- Reviews Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-stack-lg">
+<div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+<div class="p-4 bg-primary/5 text-primary rounded-2xl">
+<span class="material-symbols-outlined text-3xl" data-icon="star">star</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Average Rating</p>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-bold text-on-surface">4.8</h3>
+<div class="flex text-tertiary-container/40">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: &quot;FILL&quot; 1;">star_half</span>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+<div class="p-4 bg-secondary-container/10 text-secondary rounded-2xl">
+<span class="material-symbols-outlined text-3xl" data-icon="reviews">reviews</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Total Reviews</p>
+<h3 class="text-headline-md font-bold text-on-surface">342</h3>
+</div>
+</div>
+</div>
+<!-- Reviews Table -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/20 bg-white">
+<h3 class="font-headline-sm text-headline-sm text-primary">User Feedback</h3>
+</div>
+<div class="overflow-x-auto managed-items-scroll">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-on-surface-variant">
+<tr>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">User Name</th>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Email</th>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-center">Rating</th>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Message</th>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Date</th>
+<th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10 text-body-sm">
+<!-- Review Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">David Miller</td>
+<td class="px-6 py-4 text-on-surface-variant">david.m@example.com</td>
+<td class="px-6 py-4">
+<div class="flex justify-center items-center gap-1 text-tertiary-fixed-dim">
+<span class="font-bold">5.0</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant max-w-xs truncate">Excellent service! I found my keys within 24 hours of reporting them lost.</td>
+<td class="px-6 py-4 text-outline">Oct 24, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Review Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Emily Chen</td>
+<td class="px-6 py-4 text-on-surface-variant">e.chen@mail.com</td>
+<td class="px-6 py-4">
+<div class="flex justify-center items-center gap-1 text-tertiary-fixed-dim">
+<span class="font-bold">4.0</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant max-w-xs truncate">Interface is easy to use. The approval process was a bit slow though.</td>
+<td class="px-6 py-4 text-outline">Oct 22, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Review Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Robert Frost</td>
+<td class="px-6 py-4 text-on-surface-variant">robert.frost@outlook.com</td>
+<td class="px-6 py-4">
+<div class="flex justify-center items-center gap-1 text-tertiary-fixed-dim">
+<span class="font-bold">5.0</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant max-w-xs truncate">Found my MacBook Pro. Forever grateful to the person who turned it in!</td>
+<td class="px-6 py-4 text-outline">Oct 20, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Review Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Alex Thompson</td>
+<td class="px-6 py-4 text-on-surface-variant">alex.t@test.com</td>
+<td class="px-6 py-4">
+<div class="flex justify-center items-center gap-1 text-tertiary-fixed-dim">
+<span class="font-bold">3.0</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant max-w-xs truncate">The app crashed once while uploading a photo. Otherwise good.</td>
+<td class="px-6 py-4 text-outline">Oct 19, 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-outline-variant/10 flex justify-between items-center bg-white">
+<p class="text-body-sm text-on-surface-variant">Showing 4 of 342 reviews</p>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">Previous</button>
+<button class="px-4 py-1.5 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="ml-64 bg-white border-t border-outline-variant/20 py-8">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-6">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Founder</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">© 2024 Founder Lost &amp; Found. All rights reserved.</p>
+</div>
+<nav class="flex gap-8">
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Privacy Policy</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Terms of Service</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Help Center</a>
+</nav>
+<div class="text-right">
+<p class="font-body-sm text-on-surface-variant font-medium">Customer Support</p>
+<p class="font-label-lg text-primary mt-1">+91 90000 12345</p>
+</div>
+</div>
+</footer>
+<script>
+  window.__ADMIN_DATA__ = {
+    counts: {{ counts|tojson }},
+    users: {{ users|tojson }},
+    admins: {{ admins|tojson }},
+    lost_items: {{ lost_items|tojson }},
+    found_items: {{ found_items|tojson }},
+    claims: {{ claims|tojson }},
+    reviews: {{ reviews|tojson }}
+  };
+</script>
+<script>
+    // Navigation / View Switching Logic
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const viewTitle = document.getElementById('view-title');
+    const viewSubtitle = document.getElementById('view-subtitle');
+
+    const viewMeta = {
+        'overview-view': { title: 'Dashboard Overview', subtitle: "Welcome back, Admin. Here's the latest platform activity." },
+        'user-management-view': { title: 'User Accounts', subtitle: 'Manage and monitor all platform users.' },
+        'manage-items-view': { title: 'Manage Items', subtitle: 'Review, edit, and organize the item inventory.' },
+        'reported-view': { title: 'Reported Items', subtitle: 'Manage found and lost item reports.' },
+        'claimed-view': { title: 'Claimed Items', subtitle: 'History of resolved claims and distributions.' },
+        'reviews-view': { title: 'Platform Reviews', subtitle: 'Monitor user feedback and rating performance.' }
+    };
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-target');
+
+            // Update Nav UI
+            navLinks.forEach(l => {
+                l.classList.remove('active-nav-item');
+                l.classList.add('text-on-surface-variant');
+            });
+            link.classList.add('active-nav-item');
+            link.classList.remove('text-on-surface-variant');
+
+            // Update View UI
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(targetId).classList.add('active');
+            if (targetId === 'manage-items-view' && typeof window.renderManagedItemsFromStorage === 'function') {
+                window.renderManagedItemsFromStorage();
+            }
+
+            // Update Header
+            if (viewMeta[targetId]) {
+                viewTitle.innerText = viewMeta[targetId].title;
+                viewSubtitle.innerText = viewMeta[targetId].subtitle;
+            }
+        });
+    });
+
+    // Search bar interaction
+    const searchInput = document.querySelector('input[type="text"]');
+    if (searchInput) {
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    }
+
+    function showAdminToast(message) {
+        let toast = document.getElementById('admin-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'admin-toast';
+            toast.className = 'fixed bottom-6 right-6 z-[1000] bg-primary text-white px-5 py-3 rounded-lg shadow-xl text-sm font-semibold opacity-0 translate-y-3 transition-all duration-300';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-3');
+        setTimeout(() => toast.classList.add('opacity-0', 'translate-y-3'), 2200);
+    }
+
+    document.querySelectorAll('button').forEach(button => {
+        if (button.hasAttribute('onclick') || button.disabled || button.closest('form') !== null) return;
+
+        button.addEventListener('click', () => {
+            const text = button.innerText.trim();
+            const row = button.closest('tr');
+            const card = button.closest('.glass-panel, .glass-card, .review-card, .p-6');
+            const icon = button.querySelector('.material-symbols-outlined')?.innerText.trim();
+
+            if (text === 'Approve') {
+                card?.classList.add('opacity-60');
+                button.disabled = true;
+                showAdminToast('Report approved.');
+                return;
+            }
+
+            if (text === 'Reject') {
+                card?.classList.add('opacity-60');
+                button.disabled = true;
+                showAdminToast('Report rejected.');
+                return;
+            }
+
+            if (icon === 'delete') {
+                row?.remove();
+                card?.remove();
+                showAdminToast('Item removed.');
+                return;
+            }
+
+            if (icon === 'edit') {
+                showAdminToast('Item is ready to edit.');
+                row?.classList.add('bg-primary/5');
+                return;
+            }
+
+            if (text.includes('Lost Items')) {
+                showAdminToast('Showing lost items.');
+                return;
+            }
+
+            if (text.includes('Found Items')) {
+                showAdminToast('Showing found items.');
+                return;
+            }
+
+            if (text === 'Next' || text === 'Previous') {
+                showAdminToast(`${text} page loaded.`);
+                return;
+            }
+
+            showAdminToast(`${text || 'Action'} completed.`);
+        });
+    });
+</script>
+
+
+<script src="site-actions.js"></script>
+<script>
+  (() => {
+    const data = window.__ADMIN_DATA__ || {};
+    const counts = data.counts || {};
+    const users = data.users || [];
+    const admins = data.admins || [];
+    const lostItems = data.lost_items || [];
+    const foundItems = data.found_items || [];
+    const claims = data.claims || [];
+    const reviews = data.reviews || [];
+
+    const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char]));
+
+    const formatDate = (value) => {
+      if (!value) return 'Recently';
+      const date = new Date(String(value).replace(' ', 'T'));
+      return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    const itemPhoto = (item) => {
+      const photo = item.photo || '';
+      if (photo.startsWith('data:') || photo.startsWith('http')) return photo;
+      if (photo.startsWith('assets/')) return `/${photo}`;
+      return item.item_type === 'lost' ? 'assets/images/hero-found.svg' : 'assets/images/map.svg';
+    };
+
+    const adminData = {
+      overviewCards: document.querySelectorAll('#overview-view .glass-panel h3'),
+      recentClaims: document.querySelector('#overview-view .divide-y'),
+      userView: document.getElementById('user-management-view'),
+      claimedView: document.getElementById('claimed-view'),
+      manageItemsView: document.getElementById('manage-items-view'),
+      reportedView: document.getElementById('reported-view'),
+      reviewsView: document.getElementById('reviews-view')
+    };
+
+    const renderCounts = () => {
+      const cards = adminData.overviewCards;
+      if (cards[0]) cards[0].textContent = String(counts.users ?? users.length);
+      if (cards[1]) cards[1].textContent = String(counts.lost_items ?? lostItems.length);
+      if (cards[2]) cards[2].textContent = String(counts.found_items ?? foundItems.length);
+      if (cards[3]) cards[3].textContent = String(counts.claims ?? claims.length);
+
+      const manageCounts = document.querySelectorAll('#manage-items-view h3');
+      if (manageCounts[0]) manageCounts[0].textContent = String((lostItems.length + foundItems.length) || 0);
+      if (manageCounts[1]) manageCounts[1].textContent = String((lostItems.length + foundItems.length) || 0);
+    };
+
+    const claimRows = (rows) => rows.map((claim) => `
+      <div class="p-6 flex items-center gap-6 hover:bg-surface-container-low transition-colors">
+        <div class="w-20 h-20 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden border border-outline-variant/30 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-3xl">fact_check</span>
+        </div>
+        <div class="flex-grow">
+          <h4 class="font-label-lg text-on-surface text-lg">${escapeHtml(claim.item_type)} item #${escapeHtml(claim.item_id)}</h4>
+          <p class="text-body-sm text-on-surface-variant mt-1">Claimed by <span class="text-primary font-medium">${escapeHtml(claim.claimant_name || claim.claimant_email || 'User')}</span> • ${formatDate(claim.created_at)}</p>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full ${claim.status === 'Approved' ? 'bg-secondary-container/10 text-secondary border-secondary/10' : claim.status === 'Rejected' ? 'bg-error-container/20 text-error border-error/10' : 'bg-tertiary-fixed text-on-tertiary-fixed-variant border-tertiary-fixed-dim/20'} text-label-sm font-semibold border">
+            <span class="material-symbols-outlined text-[16px]">verified_user</span>
+            ${escapeHtml(claim.status || 'Pending')}
+          </span>
+        </div>
+        <div class="flex gap-2">
+          <button class="admin-record-action px-5 py-2 border border-outline-variant text-on-surface-variant font-label-lg rounded-lg hover:bg-surface-container-low transition-all" data-type="claim" data-id="${claim.id}" data-action="Rejected" type="button">Reject</button>
+          <button class="admin-record-action px-5 py-2 bg-primary text-white font-label-lg rounded-lg hover:bg-primary-container transition-all shadow-sm" data-type="claim" data-id="${claim.id}" data-action="Approved" type="button">Approve</button>
+        </div>
+      </div>
+    `).join('');
+
+    const itemCard = (item) => `
+      <div class="glass-panel rounded-lg group overflow-hidden transition-all">
+        <div class="h-44 relative overflow-hidden">
+          <img alt="${escapeHtml(item.item_name)}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${itemPhoto(item)}">
+          <div class="absolute top-3 right-3">
+            <span class="${item.item_type === 'found' ? 'bg-secondary/90' : 'bg-primary/90'} backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-md uppercase font-bold tracking-wider shadow-sm">${escapeHtml(item.item_type)}</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h5 class="font-label-lg text-on-surface text-base truncate">${escapeHtml(item.item_name)}</h5>
+          <p class="text-label-sm text-on-surface-variant mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">location_on</span>
+            ${escapeHtml(item.location)}
+          </p>
+          <div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+            <span class="text-label-sm text-outline">${formatDate(item.created_at)}</span>
+            <div class="flex gap-1">
+              <button class="admin-record-action p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" data-type="report" data-item-type="${item.item_type}" data-id="${item.id}" data-action="Approved" type="button">
+                <span class="material-symbols-outlined text-[20px]">check</span>
+              </button>
+              <button class="admin-record-action p-2 text-on-surface-variant hover:text-error hover:bg-error/5 rounded-lg transition-colors" data-type="report" data-item-type="${item.item_type}" data-id="${item.id}" data-action="Rejected" type="button">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+              </button>
+              <button class="admin-record-action p-2 text-on-surface-variant hover:text-error hover:bg-error-container/10 rounded-lg transition-colors" data-type="report" data-item-type="${item.item_type}" data-id="${item.id}" data-action="delete" type="button">
+                <span class="material-symbols-outlined text-[20px]">delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const userTable = () => `
+      <div class="glass-panel rounded-xl overflow-hidden">
+        <div class="p-6 border-b border-outline-variant/20 bg-white flex items-center justify-between">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-primary">User Accounts</h3>
+            <p class="text-body-sm text-on-surface-variant">${users.length} registered users and ${admins.length} admins.</p>
+          </div>
+        </div>
+        <div class="overflow-x-auto managed-items-scroll">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-surface-container-low text-on-surface-variant">
+              <tr>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Name</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Email</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Phone</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Created</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/10 text-body-sm">
+              ${users.map((user) => `
+                <tr class="hover:bg-surface-container-low/50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-on-surface">${escapeHtml(user.name)}</td>
+                  <td class="px-6 py-4 text-on-surface-variant">${escapeHtml(user.email)}</td>
+                  <td class="px-6 py-4 text-on-surface-variant">${escapeHtml(user.phone)}</td>
+                  <td class="px-6 py-4 text-outline">${formatDate(user.created_at)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    const reviewTable = () => `
+      <div class="glass-panel rounded-xl overflow-hidden">
+        <div class="p-6 border-b border-outline-variant/20 bg-white">
+          <h3 class="font-headline-sm text-headline-sm text-primary">User Feedback</h3>
+        </div>
+        <div class="overflow-x-auto managed-items-scroll">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-surface-container-low text-on-surface-variant">
+              <tr>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">User Name</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Email</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-center">Rating</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Message</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Date</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/10 text-body-sm">
+              ${reviews.map((review) => `
+                <tr class="hover:bg-surface-container-low/50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-on-surface">${escapeHtml(review.user_name)}</td>
+                  <td class="px-6 py-4 text-on-surface-variant">${escapeHtml(review.email)}</td>
+                  <td class="px-6 py-4 text-center text-tertiary-fixed-dim font-bold">${escapeHtml(review.rating)}</td>
+                  <td class="px-6 py-4 text-on-surface-variant max-w-xs truncate">${escapeHtml(review.message)}</td>
+                  <td class="px-6 py-4 text-outline">${formatDate(review.created_at)}</td>
+                  <td class="px-6 py-4 text-right">
+                    <button class="admin-record-action p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors" data-type="review" data-id="${review.id}" data-action="delete" type="button">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    const manageItems = () => `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-stack-lg">
+        <div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+          <div class="p-4 bg-primary/5 text-primary rounded-2xl"><span class="material-symbols-outlined text-3xl">inventory_2</span></div>
+          <div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Total Listed Items</p><h3 class="text-headline-md font-bold text-on-surface">${lostItems.length + foundItems.length}</h3></div>
+        </div>
+        <div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+          <div class="p-4 bg-secondary-container/10 text-secondary rounded-2xl"><span class="material-symbols-outlined text-3xl">new_releases</span></div>
+          <div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Recently Reported</p><h3 class="text-headline-md font-bold text-on-surface">${Math.min(24, lostItems.length + foundItems.length)}</h3><p class="text-label-sm text-outline">Live from SQLite</p></div>
+        </div>
+      </div>
+      <div class="glass-panel rounded-xl overflow-hidden">
+        <div class="border-b border-outline-variant/20 bg-white">
+          <div class="flex gap-8 px-6 pt-6">
+            <button class="pb-4 px-2 font-bold text-primary border-b-2 border-primary" id="tab-found-items">Found Items (${foundItems.length})</button>
+            <button class="pb-4 px-2 font-medium text-on-surface-variant hover:text-primary transition-colors" id="tab-lost-items">Lost Items (${lostItems.length})</button>
+          </div>
+        </div>
+        <div class="p-6 bg-white border-b border-outline-variant/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <h3 class="font-headline-sm text-headline-sm text-primary">Inventory List</h3>
+          <div class="relative w-full md:w-72"><span class="absolute inset-y-0 left-3 flex items-center text-outline"><span class="material-symbols-outlined text-sm">search</span></span><input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/20 w-full text-body-sm transition-all" placeholder="Filter items..." type="text"></div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-surface-container-low text-on-surface-variant">
+              <tr>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Item</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Category</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Location</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Date</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20">Status</th>
+                <th class="px-6 py-4 font-label-lg border-b border-outline-variant/20 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/10 text-body-sm">
+              ${(foundItems.concat(lostItems)).map((item) => `
+                <tr class="hover:bg-surface-container-low/50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <img alt="${escapeHtml(item.item_name)}" class="w-10 h-10 rounded bg-surface-variant object-cover" src="${itemPhoto(item)}">
+                      <span class="font-medium text-on-surface">${escapeHtml(item.item_name)}</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-on-surface-variant">${escapeHtml(item.category)}</td>
+                  <td class="px-6 py-4 text-on-surface-variant">${escapeHtml(item.location)}</td>
+                  <td class="px-6 py-4 text-outline">${formatDate(item.created_at)}</td>
+                  <td class="px-6 py-4"><span class="px-2 py-1 rounded-full ${item.item_type === 'found' ? 'bg-secondary-container/10 text-secondary' : 'bg-primary-container/10 text-primary-container'} text-label-sm font-semibold border ${item.item_type === 'found' ? 'border-secondary/10' : 'border-primary/10'}">${escapeHtml(item.item_type === 'found' ? 'Found' : 'Lost')}</span></td>
+                  <td class="px-6 py-4 text-right">
+                    <div class="flex justify-end gap-1">
+                      <button class="admin-record-action p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" data-type="report" data-item-type="${item.item_type}" data-id="${item.id}" data-action="Approved" type="button"><span class="material-symbols-outlined">check</span></button>
+                      <button class="admin-record-action p-2 text-error hover:bg-error-container/10 rounded-lg transition-colors" data-type="report" data-item-type="${item.item_type}" data-id="${item.id}" data-action="delete" type="button"><span class="material-symbols-outlined">delete</span></button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    const reportedCards = () => `
+      <div class="flex gap-gutter border-b border-outline-variant/30 mb-8">
+        <button class="pb-4 px-2 font-bold text-primary border-b-2 border-primary relative">Manage Found Items <span class="absolute -top-1 -right-2 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded-full">${foundItems.length}</span></button>
+        <button class="pb-4 px-2 font-medium text-on-surface-variant hover:text-primary transition-colors">Manage Lost Items</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+        ${(foundItems.slice(0, 4).concat(lostItems.slice(0, 4))).map(itemCard).join('')}
+      </div>
+    `;
+
+    renderCounts();
+    if (adminData.recentClaims) adminData.recentClaims.innerHTML = claimRows(claims.slice(0, 2));
+    if (adminData.userView) adminData.userView.innerHTML = userTable();
+    if (adminData.claimedView) adminData.claimedView.innerHTML = `
+      <div class="glass-panel p-12 rounded-xl text-center">
+        <span class="material-symbols-outlined text-6xl text-outline mb-4">fact_check</span>
+        <h3 class="text-headline-sm font-bold text-on-surface">Claimed History</h3>
+        <p class="text-on-surface-variant mt-2">Showing ${claims.length} stored claims from SQLite.</p>
+      </div>
+      <div class="mt-8">${claimRows(claims)}</div>
+    `;
+    if (adminData.manageItemsView) adminData.manageItemsView.innerHTML = manageItems();
+    if (adminData.reportedView) adminData.reportedView.innerHTML = reportedCards();
+    if (adminData.reviewsView) adminData.reviewsView.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-stack-lg">
+        <div class="glass-panel p-6 rounded-xl flex items-center gap-6"><div class="p-4 bg-primary/5 text-primary rounded-2xl"><span class="material-symbols-outlined text-3xl">star</span></div><div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Average Rating</p><h3 class="text-headline-md font-bold text-on-surface">${reviews.length ? (reviews.reduce((sum, review) => sum + Number(review.rating || 0), 0) / reviews.length).toFixed(1) : '0.0'}</h3></div></div>
+        <div class="glass-panel p-6 rounded-xl flex items-center gap-6"><div class="p-4 bg-secondary-container/10 text-secondary rounded-2xl"><span class="material-symbols-outlined text-3xl">reviews</span></div><div><p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Total Reviews</p><h3 class="text-headline-md font-bold text-on-surface">${reviews.length}</h3></div></div>
+      </div>
+      ${reviewTable()}
+    `;
+
+    window.renderManagedItemsFromStorage = () => {
+      if (adminData.manageItemsView) adminData.manageItemsView.innerHTML = manageItems();
+      window.bindAdminActions?.();
+    };
+    window.bindAdminActions?.();
+  })();
+</script>
+</body></html>

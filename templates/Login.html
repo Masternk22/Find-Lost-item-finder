@@ -1,0 +1,496 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lost &amp; Found Items</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(195, 198, 210, 0.45);
+        }
+        .tab-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .loading-spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            width: 16px;
+            height: 16px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .bg-gradient-auth {
+            background: radial-gradient(circle at top left, #f0f3ff 0%, #e9eefc 40%, #d7e2ff 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d5dae7",
+                        "secondary-container": "#659dfe",
+                        "tertiary": "#501a00",
+                        "inverse-surface": "#2b303b",
+                        "outline": "#737782",
+                        "surface-variant": "#dee2f0",
+                        "surface": "#f9f9ff",
+                        "on-background": "#171c25",
+                        "on-tertiary-fixed-variant": "#7a2f07",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "primary": "#002a5d",
+                        "inverse-primary": "#acc7ff",
+                        "on-secondary-fixed": "#001a40",
+                        "outline-variant": "#c3c6d2",
+                        "background": "#f9f9ff",
+                        "secondary": "#115cb9",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#003f87",
+                        "surface-container-highest": "#dee2f0",
+                        "on-surface": "#171c25",
+                        "surface-tint": "#305da6",
+                        "primary-fixed": "#d7e2ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#004491",
+                        "tertiary-fixed-dim": "#ffb597",
+                        "on-secondary-container": "#003370",
+                        "tertiary-container": "#732a02",
+                        "on-surface-variant": "#434751",
+                        "on-primary-fixed-variant": "#0d458d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ecf0fe",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-tertiary-container": "#fb9263",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container": "#e9eefc",
+                        "on-surface-variant": "#434751",
+                        "on-primary-fixed": "#001a40",
+                        "surface-container-high": "#e4e8f6",
+                        "on-primary-container": "#84adfc",
+                        "surface-bright": "#f9f9ff",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max-width": "1440px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gradient-auth min-h-screen font-body-md text-on-surface selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/40 shadow-sm shadow-primary/5">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex items-center justify-between h-16"><a href="Home.html" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-300 group">
+  <span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+  <span class="font-label-md">Back to Home</span>
+</a>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Founder</span>
+<span class="text-primary/40">|</span>
+
+</div>
+
+
+</div>
+</header>
+<main class="pt-32 pb-20 px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center min-h-screen">
+<!-- Welcome Section -->
+<div class="text-center mb-stack-lg max-w-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">USER / ADMIN LOGIN !</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Login or create your account to continue protecting what matters.</p>
+</div>
+<!-- Unified Portal Container -->
+<div class="w-full max-w-[540px]">
+<div class="glass-card rounded-lg p-8 md:p-10 flex flex-col relative overflow-hidden">
+<!-- Top-level Access Mode Tabs -->
+<div class="flex bg-surface-container-low p-1.5 rounded-2xl mb-8">
+<button class="flex-1 py-3 text-label-lg rounded-xl tab-transition text-on-surface-variant font-semibold" id="btn-mode-user" onclick="switchMode('user')">
+<span class="flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">person</span>
+User Access
+</span>
+</button>
+<button class="flex-1 py-3 text-label-lg rounded-xl tab-transition hover:text-on-surface bg-white shadow-md text-secondary font-bold" id="btn-mode-admin" onclick="switchMode('admin')">
+<span class="flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+Admin Access
+</span>
+</button>
+</div>
+<!-- Content Area: User Mode -->
+<div id="mode-user-content" class="hidden">
+<div class="flex bg-surface-container/50 p-1 rounded-xl mb-6">
+<button class="flex-1 py-2 text-label-md rounded-lg tab-transition bg-white text-primary shadow-sm" id="btn-user-login" onclick="toggleTab('user', 'login')">Login</button>
+<button class="flex-1 py-2 text-label-md rounded-lg tab-transition text-on-surface-variant hover:text-on-surface" id="btn-user-register" onclick="toggleTab('user', 'register')">Register</button>
+</div>
+<!-- User Login Form -->
+<div class="space-y-4" id="form-user-login">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Email Address</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-outline-variant" placeholder="name@company.com" type="email">
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-10 pr-10 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-outline-variant" placeholder="••••••••" type="password">
+<button class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors">visibility</button>
+</div>
+</div>
+<div class="flex items-center justify-between text-label-md">
+<label class="flex items-center gap-2 cursor-pointer text-on-surface-variant">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox">
+<span class="">Remember me</span>
+</label>
+<a class="text-primary hover:underline" href="Home.html">Forgot password?</a>
+</div>
+<button class="w-full bg-primary text-white py-3.5 rounded-xl font-label-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20" onclick="simulateLoading(this)">
+<span class="">Login</span>
+</button>
+</div>
+<!-- User Register Form -->
+<div class="hidden space-y-4" id="form-user-register">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="John Doe" type="text">
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="john@example.com" type="email">
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">call</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="+91 98765 43210" type="tel">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Password</label>
+<input class="w-full px-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="••••" type="password">
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Confirm</label>
+<input class="w-full px-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="••••" type="password">
+</div>
+</div>
+<button class="w-full bg-primary text-white py-3.5 rounded-xl font-label-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2 mt-4" onclick="simulateLoading(this)">
+<span class="">Create Account</span>
+</button>
+</div>
+</div>
+<!-- Content Area: Admin Mode -->
+<div class="" id="mode-admin-content">
+<div class="flex bg-surface-container/50 p-1 rounded-xl mb-6">
+<button class="flex-1 py-2 text-label-md rounded-lg tab-transition text-on-surface-variant" id="btn-admin-login" onclick="toggleTab('admin', 'login')">Admin Login</button>
+<button class="flex-1 py-2 text-label-md rounded-lg tab-transition hover:text-on-surface bg-white shadow-sm text-secondary" id="btn-admin-register" onclick="toggleTab('admin', 'register')">Admin Register</button>
+</div>
+<!-- Admin Login Form -->
+<div class="space-y-4 hidden" id="form-admin-login">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Admin ID or Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">badge</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all" placeholder="ADM-12345" type="text">
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface-variant ml-1">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">key</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all" placeholder="••••••••" type="password">
+</div>
+</div>
+<button class="w-full bg-secondary text-white py-3.5 rounded-xl font-label-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 mt-4 shadow-lg shadow-secondary/20" onclick="simulateLoading(this, 'bg-secondary')">
+<span class="">Login as Admin</span>
+</button>
+</div>
+<!-- Admin Register Form -->
+<div class="space-y-3" id="form-admin-register"><div class="space-y-4">
+    <div class="space-y-1">
+        <label class="font-label-md text-on-surface-variant ml-1">Admin Name</label>
+        <div class="relative group">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">person</span>
+            <input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="Full Name" type="text">
+        </div>
+    </div>
+    <div class="space-y-1">
+        <label class="font-label-md text-on-surface-variant ml-1">Official Email</label>
+        <div class="relative group">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">mail</span>
+            <input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="admin@founder.com" type="email">
+        </div>
+    </div>
+    <div class="space-y-1">
+        <label class="font-label-md text-on-surface-variant ml-1">Phone Number</label>
+        <div class="relative group">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">call</span>
+            <input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="+91 98765 43210" type="tel">
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+        <div class="space-y-1">
+            <label class="font-label-md text-on-surface-variant ml-1">Password</label>
+            <div class="relative group">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors text-[20px]">lock</span>
+                <input class="w-full pl-9 pr-8 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="••••" type="password">
+                <button class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline hover:text-secondary transition-colors text-[18px]">visibility</button>
+            </div>
+        </div>
+        <div class="space-y-1">
+            <label class="font-label-md text-on-surface-variant ml-1">Confirm</label>
+            <div class="relative group">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors text-[20px]">lock</span>
+                <input class="w-full pl-9 pr-8 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="••••" type="password">
+                <button class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline hover:text-secondary transition-colors text-[18px]">visibility</button>
+            </div>
+        </div>
+    </div>
+    <div class="space-y-1">
+        <label class="font-label-md text-on-surface-variant ml-1">Admin ID</label>
+        <div class="relative group">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">badge</span>
+            <input class="w-full pl-10 pr-4 py-3 bg-white/50 border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all placeholder:text-outline-variant" placeholder="ADM-XXXX-XXXX" type="text">
+        </div>
+    </div>
+    <button class="w-full bg-secondary text-white py-3.5 rounded-xl font-label-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-secondary/20" onclick="simulateLoading(this, 'bg-secondary')">
+        <span class="">Register Admin</span>
+    </button>
+</div></div>
+</div>
+</div>
+</div>
+<!-- Decorative Branding Section -->
+<div class="mt-stack-lg max-w-container-max-width w-full overflow-hidden rounded-3xl h-64 relative">
+
+
+</div>
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full py-stack-lg bg-surface border-t border-outline-variant mt-auto">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<span class="font-headline-sm text-headline-sm text-primary">Founder</span>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="Home.html">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="Home.html">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="Home.html">Security</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary hover:underline transition-all" href="Home.html">Cookie Settings</a>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">© 2024 Founder Lost &amp; Found. All rights reserved.</p>
+</div>
+</footer>
+<!-- Toast Notification -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-card px-6 py-3 rounded-full flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-500 z-[100]" id="toast">
+<span class="material-symbols-outlined text-error" id="toast-icon">error</span>
+<span class="text-label-lg font-medium" id="toast-msg">Please fill all fields</span>
+</div>
+<script>
+        function switchMode(mode) {
+            const isUser = mode === 'user';
+            
+            // Toggle visibility of mode contents
+            document.getElementById('mode-user-content').classList.toggle('hidden', !isUser);
+            document.getElementById('mode-admin-content').classList.toggle('hidden', isUser);
+            
+            // Update mode buttons styling
+            const userBtn = document.getElementById('btn-mode-user');
+            const adminBtn = document.getElementById('btn-mode-admin');
+            
+            if (isUser) {
+                userBtn.classList.add('bg-white', 'shadow-md', 'text-primary', 'font-bold');
+                userBtn.classList.remove('text-on-surface-variant', 'font-semibold');
+                adminBtn.classList.remove('bg-white', 'shadow-md', 'text-secondary', 'font-bold');
+                adminBtn.classList.add('text-on-surface-variant', 'font-semibold');
+            } else {
+                adminBtn.classList.add('bg-white', 'shadow-md', 'text-secondary', 'font-bold');
+                adminBtn.classList.remove('text-on-surface-variant', 'font-semibold');
+                userBtn.classList.remove('bg-white', 'shadow-md', 'text-primary', 'font-bold');
+                userBtn.classList.add('text-on-surface-variant', 'font-semibold');
+            }
+        }
+
+        function toggleTab(type, mode) {
+            const forms = {
+                user: { login: 'form-user-login', register: 'form-user-register', btnLogin: 'btn-user-login', btnRegister: 'btn-user-register' },
+                admin: { login: 'form-admin-login', register: 'form-admin-register', btnLogin: 'btn-admin-login', btnRegister: 'btn-admin-register' }
+            };
+
+            const config = forms[type];
+            const isLogin = mode === 'login';
+
+            document.getElementById(config.login).classList.toggle('hidden', !isLogin);
+            document.getElementById(config.register).classList.toggle('hidden', isLogin);
+
+            const loginBtn = document.getElementById(config.btnLogin);
+            const registerBtn = document.getElementById(config.btnRegister);
+
+            if (isLogin) {
+                loginBtn.classList.add('bg-white', 'shadow-sm', type === 'user' ? 'text-primary' : 'text-secondary');
+                loginBtn.classList.remove('text-on-surface-variant');
+                registerBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary', 'text-secondary');
+                registerBtn.classList.add('text-on-surface-variant');
+            } else {
+                registerBtn.classList.add('bg-white', 'shadow-sm', type === 'user' ? 'text-primary' : 'text-secondary');
+                registerBtn.classList.remove('text-on-surface-variant');
+                loginBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary', 'text-secondary');
+                loginBtn.classList.add('text-on-surface-variant');
+            }
+        }
+
+        async function simulateLoading(btn, bgClass = 'bg-primary') {
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<div class="loading-spinner"></div><span>Processing...</span>`;
+
+            try {
+                const formContainer = btn.closest('[id^="form-"]');
+                if (!formContainer) {
+                    throw new Error('Unable to find the active form.');
+                }
+
+                const body = new URLSearchParams();
+                if (formContainer.id === 'form-user-login') {
+                    const [emailInput, passwordInput] = formContainer.querySelectorAll('input[type="email"], input[type="password"]');
+                    body.set('mode', 'user');
+                    body.set('action', 'login');
+                    body.set('email', emailInput?.value || '');
+                    body.set('password', passwordInput?.value || '');
+                } else if (formContainer.id === 'form-user-register') {
+                    const inputs = formContainer.querySelectorAll('input');
+                    body.set('mode', 'user');
+                    body.set('action', 'register');
+                    body.set('name', inputs[0]?.value || '');
+                    body.set('email', inputs[1]?.value || '');
+                    body.set('phone', inputs[2]?.value || '');
+                    body.set('password', inputs[3]?.value || '');
+                    body.set('confirm_password', inputs[4]?.value || '');
+                } else if (formContainer.id === 'form-admin-login') {
+                    const inputs = formContainer.querySelectorAll('input');
+                    body.set('mode', 'admin');
+                    body.set('action', 'login');
+                    body.set('identifier', inputs[0]?.value || '');
+                    body.set('password', inputs[1]?.value || '');
+                } else if (formContainer.id === 'form-admin-register') {
+                    const inputs = formContainer.querySelectorAll('input');
+                    body.set('mode', 'admin');
+                    body.set('action', 'register');
+                    body.set('name', inputs[0]?.value || '');
+                    body.set('email', inputs[1]?.value || '');
+                    body.set('phone', inputs[2]?.value || '');
+                    body.set('password', inputs[3]?.value || '');
+                    body.set('confirm_password', inputs[4]?.value || '');
+                    body.set('admin_id', inputs[5]?.value || '');
+                } else {
+                    throw new Error('Unknown form container.');
+                }
+
+                const response = await fetch('/auth', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'fetch' },
+                    body
+                });
+                const data = await response.json();
+                if (!response.ok || !data.ok) {
+                    throw new Error(data.message || 'Authentication failed.');
+                }
+                showToast(data.message || 'Success.', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || 'Home.html';
+                }, 500);
+            } catch (error) {
+                showToast(error.message || 'Authentication failed.', 'error');
+            } finally {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }
+        }
+
+        function showToast(msg, type = "error") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = msg;
+            
+            if(type === "error") {
+                toastIcon.innerText = "error";
+                toastIcon.className = "material-symbols-outlined text-error";
+            } else if(type === "warning") {
+                toastIcon.innerText = "warning";
+                toastIcon.className = "material-symbols-outlined text-secondary";
+            } else {
+                toastIcon.innerText = "check_circle";
+                toastIcon.className = "material-symbols-outlined text-success";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 4000);
+        }
+    </script>
+
+
+
+
+<script src="site-actions.js"></script>
+</body></html>

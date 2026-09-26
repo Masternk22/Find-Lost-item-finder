@@ -1,0 +1,871 @@
+<html class="light" lang="en"><head></head><body class="font-body-md text-on-background overflow-x-hidden">```html
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "primary": "#002a5d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#501a00",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0d458d",
+                        "surface-container-high": "#e4e8f6",
+                        "on-surface-variant": "#434751",
+                        "surface": "#f9f9ff",
+                        "on-surface": "#171c25",
+                        "on-tertiary-container": "#fb9263",
+                        "surface-tint": "#305da6",
+                        "on-tertiary-fixed": "#360f00",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-fixed": "#d7e2ff",
+                        "outline": "#737782",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#ecf0fe",
+                        "secondary-container": "#659dfe",
+                        "secondary": "#115cb9",
+                        "surface-container": "#e9eefc",
+                        "primary-container": "#003f87",
+                        "on-secondary-fixed": "#001a40",
+                        "on-secondary-container": "#003370",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-secondary-fixed-variant": "#004491",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#acc7ff",
+                        "outline-variant": "#c3c6d2",
+                        "surface-container-low": "#f0f3ff",
+                        "on-background": "#171c25",
+                        "surface-variant": "#dee2f0",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2b303b",
+                        "primary-fixed": "#d7e2ff",
+                        "on-primary-fixed": "#001a40",
+                        "tertiary-fixed-dim": "#ffb597",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#84adfc",
+                        "surface-bright": "#f9f9ff",
+                        "surface-dim": "#d5dae7",
+                        "on-tertiary-fixed-variant": "#7a2f07",
+                        "surface-container-highest": "#dee2f0",
+                        "tertiary-container": "#732a02",
+                        "inverse-primary": "#acc7ff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "container-max-width": "1440px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "base": "8px"
+                },
+                "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                },
+                "fontSize": {
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}]
+                }
+              },
+            },
+          }
+        </script>
+<style>
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(195, 198, 210, 0.45);
+            box-shadow: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+            min-height: 100vh;
+        }
+        .nav-link-active {
+            color: #002a5d;
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-link-active::after {
+            content: '';
+            position: absolute;
+            bottom: -28px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #002a5d;
+        }
+        .modal-backdrop {
+            background: rgba(0, 42, 93, 0.2);
+            backdrop-filter: blur(8px);
+            transition: opacity 0.3s ease-out;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-open .modal-content {
+            transform: scale(1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: #ba1a1a;
+        }
+    </style>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-white/40 h-20">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex items-center justify-between h-full">
+<div class="flex items-center gap-stack-lg">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Lost & Found Items</span>
+<div class="hidden md:flex gap-stack-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Home.html">Home</a>
+<a class="font-body-md text-body-md nav-link-active" href="Items&search.html">Search</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Reportlost.html">Report Lost</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="Reportfound.html">Report Found</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all duration-300" href="userdash.html">Dashboard</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-body-sm w-64" placeholder="Quick search..." type="text"/>
+</div>
+<button onclick="window.location.href='Login.html'" class="material-symbols-outlined text-primary p-2 hover:bg-white/40 rounded-full transition-all">account_circle</button>
+</div>
+</div>
+</nav>
+<main class="pt-28 pb-stack-lg max-w-container-max-width mx-auto px-margin-desktop">
+<!-- Search & Filter Section -->
+<section class="glass-card rounded-xl p-8 mb-stack-lg">
+<div class="flex flex-col gap-6">
+<h1 class="font-headline-md text-headline-md text-primary">Find Items</h1>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="md:col-span-4 lg:col-span-2 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Search for office, college, or hospital gear..." type="text"/>
+</div>
+<div>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none appearance-none cursor-pointer">
+<option value="">All Status</option>
+<option value="lost">Lost</option>
+<option value="found">Found</option>
+</select>
+</div>
+<div>
+<select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-white/50 focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none appearance-none cursor-pointer">
+<option value="">All Categories</option>
+<option value="electronics">Electronics</option>
+<option value="bags">Bags &amp; Luggage</option>
+<option value="documents">IDs &amp; Documents</option>
+<option value="stationery">Stationery &amp; Study</option>
+<option value="hospital">Hospital</option>
+</select>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white px-6 py-3 rounded-lg font-label-lg hover:bg-primary-container transition-all flex-1">Apply Filters</button>
+<button class="border border-outline-variant text-on-surface-variant px-3 py-3 rounded-lg hover:bg-white/50 transition-all material-symbols-outlined">tune</button>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider mr-2">Quick Filters:</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Laptop</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Stethoscope</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#IDCard</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Calculator</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-label-sm text-primary cursor-pointer hover:bg-primary/10 transition-colors">#Headphones</span>
+</div>
+</div>
+</section>
+<!-- Item Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-gutter" id="item-grid">
+<!-- JS will populate these -->
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-4" id="pagination-container">
+<!-- JS will populate pagination -->
+</div>
+</main>
+<!-- Claim Modal -->
+<div class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4" id="claim-modal">
+<div class="absolute inset-0 modal-backdrop" id="modal-overlay"></div>
+<div class="relative bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden modal-content border border-white/40">
+<button class="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors material-symbols-outlined text-outline" id="close-modal">close</button>
+<div class="flex flex-col md:flex-row h-full max-h-[95vh]">
+<!-- Left Side: Image & Info -->
+<div class="w-full md:w-5/12 h-64 md:h-auto border-r border-outline-variant/20 flex flex-col">
+<div class="h-1/2 relative bg-surface-container-low overflow-hidden">
+<img alt="Item image" class="w-full h-full object-cover" id="modal-img"/>
+<div class="hidden absolute inset-0 flex items-center justify-center bg-surface-container-low text-primary" id="modal-img-fallback">
+<span class="material-symbols-outlined text-6xl">inventory_2</span>
+</div>
+</div>
+<div class="p-6 space-y-4 flex-grow bg-white/30">
+<div>
+<span class="px-3 py-1 rounded-full text-label-sm font-bold bg-secondary/10 text-secondary border border-secondary/20" id="modal-status-badge">Found</span>
+<h2 class="mt-3 font-headline-md text-headline-md text-primary leading-tight" id="modal-title">Item Name</h2>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">category</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Category</p>
+<p class="text-body-sm font-medium" id="modal-cat">Category Name</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Location</p>
+<p class="text-body-sm font-medium" id="modal-loc">Location Details</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+<div>
+<p class="text-label-sm text-outline leading-none mb-0.5">Reported On</p>
+<p class="text-body-sm font-medium" id="modal-date">Date, Year</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Form -->
+<div class="w-full md:w-7/12 p-8 flex flex-col overflow-y-auto" id="modal-form-container">
+<div id="form-content">
+<div class="mb-6">
+<h3 class="text-headline-sm font-bold text-primary">Claim Details</h3>
+<p class="text-body-sm text-on-surface-variant">Please provide your contact information to proceed with the claim.</p>
+</div>
+<form class="space-y-5" id="claim-form">
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-name">Full Name <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-name" placeholder="John Doe" required="" type="text"/>
+<p class="text-error text-label-sm hidden" id="err-name">Please enter your full name.</p>
+</div>
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-phone">Phone Number <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-phone" placeholder="+91 00000 00000" required="" type="tel"/>
+<p class="text-error text-label-sm hidden" id="err-phone">Please enter a valid 10-digit phone number.</p>
+</div>
+<div class="space-y-1">
+<label class="block text-label-lg text-primary" for="claim-email">Email Address <span class="text-error">*</span></label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" id="claim-email" placeholder="john@example.com" required="" type="email"/>
+<p class="text-error text-label-sm hidden" id="err-email">Please enter a valid email address.</p>
+</div>
+<div class="bg-error-container/30 p-3 rounded-lg hidden" id="general-error">
+<p class="text-error text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                            Please fill in all required fields before submitting your claim.
+                        </p>
+</div>
+<div class="pt-4 flex gap-4" id="modal-actions">
+<button class="flex-1 bg-primary text-white py-3.5 rounded-xl font-label-lg hover:bg-primary-container disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-primary/10" disabled="" id="confirm-claim" type="button">Confirm Claim</button>
+<button class="px-6 border border-outline-variant text-on-surface-variant py-3.5 rounded-xl font-label-lg hover:bg-surface-container transition-all" id="cancel-claim" type="button">Cancel</button>
+</div>
+</form>
+</div>
+<!-- Success Message (Initially Hidden) -->
+<div class="hidden flex flex-col items-center justify-center h-full text-center py-12 animate-fade-in" id="success-message">
+<div class="w-20 h-20 bg-tertiary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-5xl">verified</span>
+</div>
+<h3 class="text-headline-md text-primary mb-2">Request Submitted</h3>
+<p class="text-body-lg text-on-surface-variant max-w-sm mb-8">
+                        Claim Request Submitted Successfully. Please wait for admin approval.
+                    </p>
+<div class="px-6 py-4 bg-tertiary-fixed rounded-2xl border border-tertiary-fixed-dim/30">
+<p class="text-tertiary font-bold font-label-lg flex items-center gap-2">
+<span class="material-symbols-outlined">pending_actions</span>
+                            Current Status: Pending Approval
+                        </p>
+</div>
+<button class="mt-10 text-primary font-label-lg hover:underline" id="close-success-modal" type="button">Back to Search</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-12 mt-16 border-t border-outline-variant/30">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-4">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Founder</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs leading-relaxed">The dedicated Lost &amp; Found platform for modern office hubs, academic institutions, and medical facilities.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-label-lg text-primary uppercase tracking-wider">Help &amp; Support</h4>
+<div class="flex flex-col gap-3">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Use</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-label-lg text-primary uppercase tracking-wider">Connect</h4>
+<div class="flex flex-col gap-2">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                    help@founder.com
+                </p>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-4">© 2024 Founder Lost &amp; Found.</p>
+</div>
+</div>
+</footer>
+<script>
+    const allItems = [
+        // New Hospital Items
+        { title: "Stethoscope", cat: "Hospital", icon: "stethoscope", loc: "Main Clinic, Room 4", status: "Found", date: "Nov 02, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDfgTFMDeS7eoTe_OyHaf690Zle1BRMthDbOzh04BAVWYChSD6ts2S2NQdPZrQDzmZJeaj_Tba4MwPgGEoIm5t4XwpFBshfwQJLFeL9RRZF77H98T21DEiZZoBxYnzGdfs3DnI7IiMBRrE1TLcGRN9OsSH5jcmZ4_Ub2yvDr2p3on9t-gqhcvfquKnZcy4SCkFa2LXiFQn_2jLSMYRlxkVcc5iQszXVCijfEGFKITebI34-a0T_C6nAfDNw9kLqQDulFZWsMCpG9Gh5" },
+        { title: "Blood Pressure Monitor", cat: "Hospital", icon: "monitor_heart", loc: "Recovery Ward", status: "Found", date: "Nov 02, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuB1nyKsABHJ9iAuu2V6XNQTfcu3z2MYi6_nDLJklRS3ccaNq_0-03UE0D0xef58xkA-0i8FS037ztF5lGSdoOf9syPInB4ebUc4zwlMqj6Bvn7rNRkr-cJshddydyfOmRca8Xxe9NZBmzQM6ZWGdonXSVIdhO2_fGSroIPD6qxyLTpXkErkunPjqKFvEtGY8V1I1xy_FhdfmcMMpxPGw57BGl3CZ34XSf-zeeqqkRbe9IH6LmL-2cMYeJ0_MLjvStpWZ64xwxlVwnkr" },
+        { title: "Lab Coat", cat: "Hospital", icon: "clinical_notes", loc: "Staff Locker Room", status: "Found", date: "Nov 01, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuB1YEJ01_mVwdu2LeEV9DiBRBdrQsW7Y3wyM9sl9Lz6irbgBgJv8ogUtzCyLGNW0NKdry8QX-NuYcnZt7BQGXWYkhFVf1vpsN3dFP-RyigtRoUja24mpVPk3HlH7UneBR-ufr-BlYalMNBHKtjDcI0YUvHbtRMzf18K7UCEcAS0ca6x_D4qsLRyNpDG-iUAcDsyhjwA8AUoHHh8PYZW7Iwf-zTpv4DbGqkzUtHslYsedQvdshFt17UutEhHqA3U7qYNWqB6Mjzovrlc" },
+        { title: "Medical Scrubs", cat: "Hospital", icon: "checkroom", loc: "Sterile Hallway", status: "Found", date: "Nov 01, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuA7QxwqMar-V-ngSm7ZO2wEKfYnhTo5gck_4-ymJb8neLsNP7eag0XvrtOBZGdwCxo9GqxSMU9ObHR-vuXsLRdXdBHeSPmbIhrJOrjxPov_jmlIBMSbYFEq7rvAcIkMd80FOfG1u14Gavim0KJP6F1m-9WjSZNieQ_pcS_3x2fc29R6cp_UrGNi5woHY3nCQBvSCyATPwpO21sHuqOArqPrnhb0RwL_2vLbFRBC7EERXRBFVVlfEQuN9IDaeEUdJmeQswKNMq6JAhce" },
+        
+        // New Office Items
+        { title: "Wireless Mechanical Keyboard", cat: "Office", icon: "keyboard", loc: "IT Hub", status: "Found", date: "Nov 03, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuAhLFPYc5D1xXfDiEC07KuB25pkE7LGpB--_i2xf5gXUa-KcQG94nzLriBS5NYhqNGQeFapcQzEGhE54nJcqcdYPNNOdecd0oEXTJYafXSNLpQmxVYukUXVTe5gCbv_KT_CiWiTv0RyiO7JB-5sAniFyb7Nm8araWh57yAKls_QfhjN_cwhRUJbg0Pjn4lVorLHiw8FSkrh5n84lsHL3Abmpc7TOZ5pAUA8bsnbnx64dxp__PDhcPoPW0ZQWqx6AxZ324QkKe6-NsbE" },
+        { title: "Ergonomic Chair", cat: "Office", icon: "chair", loc: "Conference Room B", status: "Found", date: "Nov 03, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuA9ZyuVYHLkt6hIwZVnApj7KOoOBmzFgjgvm4xI8ypCf6Bz_DIrF_xntpmN-LL0rP4-SgyoEc5U6vyLS4FaftshfEr6RE36llL4Qo3Uedma-1nK1ebBtIeMcRHzvvLsMBBbbWEK7IPxo9ZSLE9Ykj4W_gwXjoYFWFK8N4yJ4T3Lu54MqehNmF3itSJkw8mehRf2IcIeojB8KofUAAKLxkTmZLY6pV5Qrqe64QT8cComF2j_HmomwHKGA1G_5lX3f1ZB8L6IfH4FYJRF" },
+        { title: "Professional Briefcase", cat: "Office", icon: "work", loc: "Lobby Entrance", status: "Found", date: "Nov 02, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDac8gYvRQAnRK_knLLEyP8OCvm-Ydxx-K_WnMAAO0zk9evHAUgA1Jm32xeiU4Aw2UdkNm6HvnWhLQEkCJ-Kmj31w2PIA5JKDWx5ExfsAG4Dklce5csGAzviMZasfeg4_IvTKiIahaQC-tPT1yNQgbNs5ZGy9wddHQClTdFs1wzZE1j7QGZud0cH01_eP_xvICUtD4p7MvT0O9DRkK5mjd8UCGy0g3lLtYZMk5v_Mu8zS2JSowu3gauBj83TFg_9_Q0j_gLOTgWk_GV" },
+        
+        // New College Items
+        { title: "Modern Desk Lamp", cat: "College", icon: "light", loc: "Library Study Pod", status: "Found", date: "Nov 04, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuAYueJP9BLJJSMg7F3QjLWgmRTk3OrkBDJ9q4GYdAGouIcvqQl03aEqxp8rlMwIjsP2KIdS135In43Rf_hVAez6MRlc5m7x08ZozY-8uv6nnKa3JSZtrgabtz2BBAEj4h1Z8ikoVm5WsxVvRikXtYjrZ8T3-r-p9uiOuyThqWiV-rW4x8JYkFUU5AmsVG-btN5bgkmV8HRO7R1LzVxLT2lAPpYPheO4-k6Cp0oeBMb9E0rN4Tk71KgGAI5vZU0czxV4_H76cd-e6zOC" },
+        { title: "Organic Chemistry Textbook", cat: "College", icon: "menu_book", loc: "Science Lab 3", status: "Found", date: "Nov 04, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFQnnknvoSZABmWT4LX0gc50E0eY629FYLrlz3nFjUulE6GySsy43W7QGzf06BPetd7LzK4AMn_etMl5fWqbgOXzMHEqPjipC0TXR4LftqZHm_VtQWn5qLBCSeYVsR8ot64OR8ayfvHyWQyXT0wKcnTWGoh5BbTUybmWxRDVTecLJG5By-H2_z0OK4-EAeuuRcrZcNoiGsASwehub6ZeB_IyVXgcOUqIz0pfZvG5e2nIW94-x-aQeGz14V71qBVO5wf8EqK1I7Fa5R" },
+        { title: "Architectural Blueprints", cat: "College", icon: "architecture", loc: "Design Studio", status: "Found", date: "Nov 03, 2023", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDnVW3jE7CtR8g2LQZvGulT_nUDAZ4o05_oBEd8RlTXCgGLCQqDDp0-MiVaSa1AvQAW4qAOPhHpiDu3Ke3E8rjB4yTrwE8r83A_QBHDOzuTRzxWel_NDGHOyFFY5wtumRKnYZHo726I27scyNSQdbGmhBazAmI6L5PBiiu3BCvRREmsXOzsmDaQhxzxAcn7Hbb3SMNvUEaLctsw9HEIDu6_DvXcY7qudrpyDlJarPMrTt_Un7_q22yBcA-kRGNmgXQMnc_7J0cvY4Db" },
+    ];
+
+    const removedSearchItemTitles = new Set([
+        'Graphing Calculator',
+        'Black Laptop Bag',
+        'Dell Laptop',
+        'Student ID',
+        'Casio Calculator',
+        'Apple AirPods',
+        'Electric Kettle',
+        'Medical Journals',
+        'Medical Clipboard',
+        'Infrared Thermometer',
+        'Essential Oil Diffuser',
+        'Yoga Ball Chair',
+        'USB-C Hub',
+        'Silver Magnifying Glass',
+        'Digital Voice Recorder',
+        'Safety Goggles',
+        'Wireless Presenter',
+        'Office Access Card',
+        'Employee ID Badge'
+    ]);
+
+    function isRemovedSearchItem(item) {
+        return removedSearchItemTitles.has((item?.title || '').trim());
+    }
+
+    function escapeSvgText(value) {
+        return String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char]));
+    }
+
+    function escapeAttr(value) {
+        return String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char]));
+    }
+
+    function normalizedImageKey(value) {
+        return String(value || '')
+            .toLowerCase()
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9]+/g, ' ')
+            .trim();
+    }
+
+    const itemPhotoUrls = {
+        'graphing calculator': 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=1200&q=80',
+        'black laptop bag': 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80',
+        'dell laptop': 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80',
+        'student id': 'data:image/jpeg;base64,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',
+        'casio calculator': 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&w=1200&q=80',
+        'apple airpods': 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=1200&q=80',
+        'stethoscope': 'https://media.istockphoto.com/id/874103026/photo/heart-stethoscope.jpg?s=612x612&w=0&k=20&c=tjQ8Y2R-x4LToTYHbGBUZ41AlZQLbHO2ixqXQOzwrUw=',
+        'blood pressure monitor': 'https://media.istockphoto.com/id/1281389365/photo/blood-pressure-gauge.jpg?s=612x612&w=0&k=20&c=2vaSXGDF649H_UcFnNJ2YyJWmKY0p4FQDgk8PAKHZIA=',
+        'lab coat': 'data:image/jpeg;base64,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',
+        'medical scrubs': 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1200&q=80',
+        'wireless mechanical keyboard': 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80',
+        'ergonomic chair': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80',
+        'professional briefcase': 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80',
+        'modern desk lamp': 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1200&q=80',
+        'organic chemistry textbook': 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80',
+        'architectural blueprints': 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80'
+    };
+
+    const categoryPhotoUrls = {
+        electronics: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+        documents: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
+        bags: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80',
+        luggage: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=80',
+        stationery: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80',
+        study: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80',
+        hospital: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=1200&q=80',
+        office: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
+        college: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80'
+    };
+
+    function localFallbackImage(item = {}) {
+        const title = normalizedImageKey(item.title);
+        const category = normalizedImageKey(item.cat);
+
+        if (/(calculator|presenter|laptop|airpods|headphones|keyboard)/.test(title)) return 'assets/images/electronics.svg';
+        if (/(id|badge|card|document)/.test(title) || /document/.test(category)) return 'assets/images/documents.svg';
+        if (/(stethoscope|pressure|lab coat|scrubs|medical)/.test(title) || /hospital/.test(category)) return 'assets/images/hospital.svg';
+        if (/(bag|briefcase|chair|lamp)/.test(title) || /(office|bags|luggage)/.test(category)) return 'assets/images/office.svg';
+        if (/(book|blueprint|study|college)/.test(title) || /(study|college|stationery)/.test(category)) return 'assets/images/study.svg';
+        return 'assets/images/hero-found.svg';
+    }
+
+    function imageFallbacksForItem(item = {}) {
+        const title = normalizedImageKey(item.title);
+        const category = normalizedImageKey(item.cat);
+        const categoryKey = Object.keys(categoryPhotoUrls).find((key) => category.includes(key));
+        const urls = [
+            itemPhotoUrls[title],
+            categoryKey ? categoryPhotoUrls[categoryKey] : '',
+            localFallbackImage(item)
+        ].filter(Boolean);
+        return [...new Set(urls)];
+    }
+
+    function imageSrcForItem(item = {}) {
+        if (item.photoData || item.itemPhoto || item.photo) return item.photoData || item.itemPhoto || item.photo;
+        if (String(item.src || '').startsWith('data:image/')) return item.src;
+        return imageFallbacksForItem(item)[0];
+    }
+
+    const baseSearchItems = allItems.filter((item) => !isRemovedSearchItem(item)).map((item, index) => ({
+        id: item.id || `item-${index + 1}`,
+        reporter: item.reporter || 'System',
+        ...item,
+        src: imageSrcForItem(item)
+    }));
+
+    function fallbackImageMarkup() {
+        return `
+            <div class="hidden absolute inset-0 bg-surface-container-low">
+                <img alt="" class="w-full h-full object-cover" src="assets/images/hero-found.svg">
+            </div>
+        `;
+    }
+
+    function revealImageFallback(image) {
+        const fallbacks = JSON.parse(image.dataset.fallbacks || '[]');
+        const nextIndex = Number(image.dataset.fallbackIndex || '0') + 1;
+        if (fallbacks[nextIndex]) {
+            image.dataset.fallbackIndex = String(nextIndex);
+            image.src = fallbacks[nextIndex];
+            return;
+        }
+
+        image.onerror = null;
+        image.src = localFallbackImage({
+            title: image.dataset.title,
+            cat: image.dataset.cat
+        });
+        image.classList.remove('hidden');
+        image.nextElementSibling?.classList.add('hidden');
+    }
+
+    function setModalImage(item) {
+        const fallback = document.getElementById('modal-img-fallback');
+        const icon = item.icon || 'inventory_2';
+        if (fallback) {
+            fallback.classList.add('hidden');
+            fallback.querySelector('.material-symbols-outlined').textContent = icon;
+        }
+        const fallbackSrc = localFallbackImage(item);
+        mImg.classList.remove('hidden');
+        mImg.onerror = () => {
+            mImg.onerror = null;
+            mImg.src = fallbackSrc;
+            fallback?.classList.add('hidden');
+        };
+        mImg.src = imageSrcForItem(item) || fallbackSrc;
+    }
+
+    function itemMergeKey(item) {
+        return `${item.title || ''}|${item.cat || ''}|${item.loc || ''}|${item.status || ''}`.toLowerCase();
+    }
+
+    function mergeStoredAndBuiltInItems(storedItems) {
+        const merged = [];
+        const seen = new Set();
+
+        const addItem = (item, fallbackIndex) => {
+            if (!item || isRemovedSearchItem(item)) return;
+            const normalized = {
+                id: item.id || `item-${fallbackIndex + 1}`,
+                reporter: item.reporter || 'System',
+                ...item,
+                src: imageSrcForItem(item)
+            };
+            const key = normalized.id || itemMergeKey(normalized);
+            if (seen.has(key)) return;
+            seen.add(key);
+            merged.push(normalized);
+        };
+
+        baseSearchItems.forEach(addItem);
+        if (Array.isArray(storedItems)) {
+            storedItems.forEach((item, index) => {
+                const reportKey = item?.reportId ? `report-${item.reportId}` : itemMergeKey(item || {});
+                const alreadyAdded = merged.some((entry) => {
+                    return (item?.reportId && entry.reportId === item.reportId) || itemMergeKey(entry) === reportKey;
+                });
+                if (!alreadyAdded && !isRemovedSearchItem(item)) addItem(item, baseSearchItems.length + index);
+            });
+        }
+
+        return merged;
+    }
+
+    const storedItems = JSON.parse(localStorage.getItem('founder_items') || 'null');
+    allItems.splice(0, allItems.length, ...mergeStoredAndBuiltInItems(storedItems));
+    localStorage.setItem('founder_items', JSON.stringify(allItems));
+
+    const itemsPerPage = 9;
+    let currentPage = 1;
+    let filteredItems = [...allItems];
+
+    const container = document.getElementById('item-grid');
+    const paginationContainer = document.getElementById('pagination-container');
+    const modal = document.getElementById('claim-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const closeModal = document.getElementById('close-modal');
+    const cancelModal = document.getElementById('cancel-claim');
+    const confirmBtn = document.getElementById('confirm-claim');
+    const formContent = document.getElementById('form-content');
+    const successArea = document.getElementById('success-message');
+    const closeSuccessBtn = document.getElementById('close-success-modal');
+
+    const mImg = document.getElementById('modal-img');
+    const mTitle = document.getElementById('modal-title');
+    const mCat = document.getElementById('modal-cat');
+    const mLoc = document.getElementById('modal-loc');
+    const mDate = document.getElementById('modal-date');
+    const mBadge = document.getElementById('modal-status-badge');
+
+    // Form inputs
+    const inputName = document.getElementById('claim-name');
+    const inputPhone = document.getElementById('claim-phone');
+    const inputEmail = document.getElementById('claim-email');
+    const errName = document.getElementById('err-name');
+    const errPhone = document.getElementById('err-phone');
+    const errEmail = document.getElementById('err-email');
+    const generalError = document.getElementById('general-error');
+
+    function renderItems(page) {
+        container.innerHTML = '';
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = filteredItems.slice(start, end);
+
+        if (pageItems.length === 0) {
+            container.innerHTML = `
+                <div class="sm:col-span-2 lg:col-span-3 glass-card rounded-xl p-10 text-center">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-3">search_off</span>
+                    <h2 class="font-headline-sm text-headline-sm text-primary mb-2">No matching items</h2>
+                    <p class="text-on-surface-variant">Try a different keyword, status, or category.</p>
+                </div>
+            `;
+            renderPagination();
+            return;
+        }
+
+        pageItems.forEach((item, index) => {
+            const globalIndex = start + index;
+            const statusColor = item.status === 'Found' ? 'secondary' : 'primary';
+            const session = JSON.parse(localStorage.getItem('founder_session') || 'null');
+            const isAdmin = session?.role === 'admin';
+            const claimButton = isAdmin
+                ? '<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-lg text-label-md cursor-not-allowed opacity-70" type="button" disabled>Admin View</button>'
+                : item.status === 'Lost'
+                    ? `<button onclick="window.location.href='Reportfound.html'" class="bg-secondary text-white px-4 py-2 rounded-lg text-label-md hover:bg-secondary-container transition-colors" type="button">Found</button>`
+                    : `<button onclick="openClaimModalById('${item.id}')" class="bg-primary text-white px-4 py-2 rounded-lg text-label-md hover:bg-primary-container transition-colors claim-trigger" type="button">Claim Item</button>`;
+            const imageFallbacks = escapeAttr(JSON.stringify(imageFallbacksForItem(item)));
+            const html = `
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col h-full animate-fade-in">
+                    <div class="relative h-48 overflow-hidden bg-surface-container-low">
+                        <img src="${imageSrcForItem(item)}" alt="${escapeAttr(item.title)}" data-title="${escapeAttr(item.title)}" data-cat="${escapeAttr(item.cat)}" data-icon="${escapeAttr(item.icon)}" data-status="${escapeAttr(item.status)}" data-fallback-index="0" data-fallbacks="${imageFallbacks}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" onerror="revealImageFallback(this)" />
+                        ${fallbackImageMarkup()}
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 rounded-full text-label-sm font-bold bg-${statusColor}/10 text-${statusColor} backdrop-blur-md border border-${statusColor}/20">${item.status}</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow gap-3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-headline-sm text-headline-sm text-on-surface truncate">${item.title}</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-on-surface-variant text-label-md">
+                                <span class="material-symbols-outlined text-[18px]">${item.icon || 'tag'}</span>
+                                <span>${item.cat}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-on-surface-variant text-label-md">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                <span class="truncate">${item.loc}</span>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-4 flex items-center justify-between">
+                            <span class="text-label-sm text-outline">${item.date}</span>
+                            ${claimButton}
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        });
+        renderPagination();
+    }
+
+    function renderPagination() {
+        paginationContainer.innerHTML = '';
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+        if (totalPages <= 1) return;
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-white transition-all material-symbols-outlined text-outline ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''}`;
+        prevBtn.innerHTML = 'chevron_left';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => { if(currentPage > 1) { currentPage--; renderItems(currentPage); window.scrollTo({top: 0, behavior: 'smooth'}); } };
+        paginationContainer.appendChild(prevBtn);
+
+        const pageList = document.createElement('div');
+        pageList.className = 'flex gap-2';
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement('button');
+            const isActive = i === currentPage;
+            pageLink.className = isActive 
+                ? 'w-10 h-10 flex items-center justify-center rounded-lg font-label-lg bg-primary text-white shadow-lg shadow-primary/20' 
+                : 'w-10 h-10 flex items-center justify-center rounded-lg bg-white/50 border border-outline-variant text-on-surface font-label-lg hover:border-primary hover:bg-white transition-all';
+            pageLink.innerText = i;
+            pageLink.onclick = () => { currentPage = i; renderItems(currentPage); window.scrollTo({top: 0, behavior: 'smooth'}); };
+            pageList.appendChild(pageLink);
+        }
+        paginationContainer.appendChild(pageList);
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-white transition-all material-symbols-outlined text-outline ${currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''}`;
+        nextBtn.innerHTML = 'chevron_right';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => { if(currentPage < totalPages) { currentPage++; renderItems(currentPage); window.scrollTo({top: 0, behavior: 'smooth'}); } };
+        paginationContainer.appendChild(nextBtn);
+    }
+
+    function validateForm() {
+        let isValid = true;
+        
+        // Name validation
+        if (inputName.value.trim() === '') {
+            errName.classList.remove('hidden');
+            isValid = false;
+        } else {
+            errName.classList.add('hidden');
+        }
+
+        // Phone validation (10 digits)
+        const phoneRegex = /^[0-9]{10,}$/;
+        const cleanPhone = inputPhone.value.replace(/\D/g, '');
+        if (!phoneRegex.test(cleanPhone)) {
+            errPhone.classList.remove('hidden');
+            isValid = false;
+        } else {
+            errPhone.classList.add('hidden');
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(inputEmail.value)) {
+            errEmail.classList.remove('hidden');
+            isValid = false;
+        } else {
+            errEmail.classList.add('hidden');
+        }
+
+        confirmBtn.disabled = !isValid;
+        
+        if (isValid) {
+            generalError.classList.add('hidden');
+        } else if (inputName.value || inputPhone.value || inputEmail.value) {
+            generalError.classList.remove('hidden');
+        }
+
+        return isValid;
+    }
+
+    // Attach validation listeners
+    [inputName, inputPhone, inputEmail].forEach(input => {
+        input.addEventListener('input', validateForm);
+        input.addEventListener('blur', validateForm);
+    });
+
+    window.openClaimModal = function(index) {
+        const item = allItems[index];
+        if (!item) return;
+        setModalImage(item);
+        mTitle.innerText = item.title;
+        mCat.innerText = item.cat;
+        mLoc.innerText = item.loc;
+        mDate.innerText = item.date;
+        
+        const statusColor = item.status === 'Found' ? 'secondary' : 'primary';
+        mBadge.innerText = item.status;
+        mBadge.className = `px-3 py-1 rounded-full text-label-sm font-bold bg-${statusColor}/10 text-${statusColor} border border-${statusColor}/20`;
+        
+        // Reset Modal State
+        formContent.classList.remove('hidden');
+        successArea.classList.add('hidden');
+        document.getElementById('claim-form').reset();
+        confirmBtn.disabled = true;
+        generalError.classList.add('hidden');
+        [errName, errPhone, errEmail].forEach(e => e.classList.add('hidden'));
+
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('modal-open'), 10);
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.openClaimModalById = function(itemId) {
+        const itemIndex = allItems.findIndex((item) => item.id === itemId);
+        if (itemIndex >= 0) {
+            openClaimModal(itemIndex);
+        }
+    };
+
+    function closeClaimModal() {
+        modal.classList.remove('modal-open');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+
+    confirmBtn.addEventListener('click', () => {
+        if (validateForm()) {
+            formContent.classList.add('hidden');
+            successArea.classList.remove('hidden');
+            
+            // Update item info status badge to yellow Pending
+            mBadge.innerText = 'Pending Approval';
+            mBadge.className = 'px-3 py-1 rounded-full text-label-sm font-bold bg-tertiary-fixed text-tertiary border border-tertiary-fixed-dim/40';
+        }
+    });
+
+    closeModal.addEventListener('click', closeClaimModal);
+    cancelModal.addEventListener('click', closeClaimModal);
+    modalOverlay.addEventListener('click', closeClaimModal);
+    closeSuccessBtn.addEventListener('click', closeClaimModal);
+
+    window.applyItemFilters = function() {
+        const filterSection = document.querySelector('section.glass-card');
+        const searchInput = filterSection?.querySelector('input[placeholder*="Search"]');
+        const selects = filterSection?.querySelectorAll('select') || [];
+        const query = (searchInput?.value || '').trim().toLowerCase();
+        const status = selects[0]?.value || '';
+        const category = selects[1]?.value || '';
+
+        filteredItems = allItems.filter((item) => {
+            const haystack = `${item.title} ${item.cat} ${item.loc} ${item.status}`.toLowerCase();
+            const matchesQuery = !query || haystack.includes(query);
+            const matchesStatus = !status || item.status.toLowerCase() === status;
+            const matchesCategory = !category || item.cat.toLowerCase().includes(category);
+            return matchesQuery && matchesStatus && matchesCategory;
+        });
+
+        currentPage = 1;
+        renderItems(currentPage);
+    };
+
+    const filterSection = document.querySelector('section.glass-card');
+    const mainSearchInput = filterSection?.querySelector('input[placeholder*="Search"]');
+    const applyFiltersBtn = Array.from(filterSection?.querySelectorAll('button') || []).find((button) => button.textContent.trim() === 'Apply Filters');
+    const resetFiltersBtn = Array.from(filterSection?.querySelectorAll('button') || []).find((button) => button.textContent.trim() === 'tune');
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get('q');
+
+    if (initialQuery && mainSearchInput) {
+        mainSearchInput.value = initialQuery;
+    }
+
+    applyFiltersBtn?.addEventListener('click', window.applyItemFilters);
+    resetFiltersBtn?.addEventListener('click', () => {
+        if (mainSearchInput) mainSearchInput.value = '';
+        filterSection?.querySelectorAll('select').forEach((select) => select.value = '');
+        window.applyItemFilters();
+    });
+    mainSearchInput?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            window.applyItemFilters();
+        }
+    });
+    document.querySelectorAll('section.glass-card .rounded-full').forEach((chip) => {
+        if (!chip.textContent.trim().startsWith('#')) return;
+        chip.addEventListener('click', () => {
+            if (mainSearchInput) mainSearchInput.value = chip.textContent.replace('#', '').trim();
+            window.applyItemFilters();
+        });
+    });
+
+    window.applyItemFilters();
+</script>
+<script src="site-actions.js"></script>
+</body></html>

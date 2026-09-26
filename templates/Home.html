@@ -1,0 +1,344 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lost &amp; Found Items</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="../static/css/app.css" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(195, 198, 210, 0.45);
+            box-shadow: none;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        body {
+            background-color: #f9f9ff;
+            background-attachment: fixed;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(48, 93, 166, 0.1) !important;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 glass-nav h-20">
+<div class="max-w-container-max-width mx-auto px-margin-desktop flex items-center justify-between h-full">
+<div class="flex items-center gap-12">
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">Founder</span>
+<div class="hidden md:flex gap-8 items-center h-full">
+<a class="font-label-lg text-primary relative h-full flex items-center after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="Home.html">Home</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="Items&search.html">Search</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="Reportlost.html">Report Lost</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="Reportfound.html">Report Found</a>
+<a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors py-2" href="userdash.html">Dashboard</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex relative">
+<input class="bg-surface-container-low border-none rounded-full px-6 py-2 focus:ring-2 focus:ring-primary/20 w-64 text-body-sm transition-all placeholder:text-outline" placeholder="Search items..." type="text">
+<span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span>
+</div>
+<button onclick="window.location.href='Login.html'" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="mt-20">
+<!-- Hero Section -->
+<section class="relative py-24 overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid md:grid-cols-2 gap-gutter items-center">
+<div class="z-10">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-6 leading-[1.1]">Find What You Lost</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                        The ultimate high-trust platform for schools and workplaces to reunite lost valuables with their owners. Fast, secure, and community-driven.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<a href="Reportlost.html" class="bg-primary text-on-primary px-10 py-4 rounded-lg font-label-lg text-label-lg hover:brightness-110 active:scale-[0.98] transition-all inline-flex items-center justify-center">
+                            Report Lost Item
+                        </a>
+<a href="Reportfound.html" class="border border-primary/30 bg-white text-primary px-10 py-4 rounded-lg font-label-lg text-label-lg hover:bg-surface-container-low active:scale-[0.98] transition-all inline-flex items-center justify-center">
+                            Report Found Item
+                        </a>
+</div>
+</div>
+<div class="relative">
+<div class="relative z-10">
+<img alt="Hero Image" class="rounded-[1.75rem] w-full h-[400px] object-cover shadow-inner" src="assets/images/hero-found.svg">
+<div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg max-w-[240px] border border-outline-variant/40">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(17,92,185,0.5)]"></span>
+<span class="text-[11px] font-bold text-primary uppercase tracking-widest">Recently Found</span>
+</div>
+<p class="font-headline-sm text-label-lg font-bold text-primary mb-1">MacBook Pro 14"</p>
+<p class="text-xs text-on-surface-variant">Found in Conference Room B</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="py-20">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<h2 class="font-headline-md text-headline-md text-primary text-center mb-16">Why Trust Founder?</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Feature 1 -->
+<div class="glass-card p-10 rounded-lg md:col-span-2 transition-all duration-500 group">
+<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[36px]">search_insights</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Fast Search</h3>
+<p class="text-on-surface-variant text-body-md leading-relaxed">AI-powered matching algorithms that connect lost reports with found items in milliseconds based on location and descriptions.</p>
+</div>
+<!-- Feature 2 -->
+<div class="glass-card p-10 rounded-lg transition-all duration-500 group">
+<div class="w-14 h-14 bg-secondary-container/10 rounded-2xl flex items-center justify-center mb-8 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">verified_user</span>
+</div>
+<h3 class="font-label-lg text-lg font-bold text-primary mb-3">Secure Claim</h3>
+<p class="text-on-surface-variant text-body-sm leading-relaxed">Verification steps ensure items only return to their true owners with cryptographic proof.</p>
+</div>
+<!-- Feature 3 -->
+<div class="glass-card p-10 rounded-lg transition-all duration-500 group">
+<div class="w-14 h-14 bg-tertiary-fixed-dim/20 rounded-2xl flex items-center justify-center mb-8 text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">notifications_active</span>
+</div>
+<h3 class="font-label-lg text-lg font-bold text-primary mb-3">Real-Time Alerts</h3>
+<p class="text-on-surface-variant text-body-sm leading-relaxed">Instant notifications across all your devices when a potential match is found near you.</p>
+</div>
+<!-- Feature 4 -->
+
+</div>
+</div>
+</section>
+<!-- Statistics Section -->
+
+<!-- Testimonials -->
+<section class="py-32">
+
+</section>
+<!-- User Reviews Section -->
+<section class="py-24 bg-surface-container-low/30 border-y border-outline-variant/30">
+<div class="max-w-container-max-width mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">User Reviews</h2>
+<p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">Hear what our community has to say about their experience with Founder.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-24">
+<!-- Review Card 1 -->
+<div class="bg-white rounded-lg p-8 border border-outline-variant/20 flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-primary flex items-center justify-center font-bold text-sm">AM</div>
+<div>
+<p class="font-label-lg text-primary">Alice Miller</p>
+<p class="text-label-sm text-outline">Oct 12, 2023</p>
+</div>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-body-md leading-relaxed">
+                    "Absolutely seamless experience! I found a set of Airpods and the verification process for the owner was very reassuring."
+                </p>
+</div>
+<!-- Review Card 2 -->
+<div class="bg-white rounded-lg p-8 border border-outline-variant/20 flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-sm">RK</div>
+<div>
+<p class="font-label-lg text-primary">Robert King</p>
+<p class="text-label-sm text-outline">Sep 28, 2023</p>
+</div>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[0]">star</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-body-md leading-relaxed">
+                    "Great app for our university campus. It's much better than the messy WhatsApp groups we used to have for lost and found."
+                </p>
+</div>
+<!-- Review Card 3 -->
+<div class="bg-white rounded-lg p-8 border border-outline-variant/20 flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-bold text-sm">LC</div>
+<div>
+<p class="font-label-lg text-primary">Linda Chen</p>
+<p class="text-label-sm text-outline">Nov 05, 2023</p>
+</div>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+<span class="material-symbols-outlined text-[18px] fill-[1]">star</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-body-md leading-relaxed">
+                    "Founder helped me get back my designer glasses within a day. I'm so grateful for this platform and the honest person who found them!"
+                </p>
+</div>
+</div>
+<!-- Submit Review Form -->
+<div class="max-w-3xl mx-auto">
+<div class="bg-white border border-outline-variant/30 p-10 rounded-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-8 text-center">Share Your Experience</h3>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" id="reviewForm">
+<div class="flex flex-col gap-2">
+<label class="text-label-lg text-on-surface ml-1">Full Name</label>
+<input class="bg-white/60 border border-outline-variant/30 rounded-xl px-5 py-3 focus:ring-2 focus:ring-primary/10 transition-all" placeholder="John Doe" required="" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-lg text-on-surface ml-1">Email Address</label>
+<input class="bg-white/60 border border-outline-variant/30 rounded-xl px-5 py-3 focus:ring-2 focus:ring-primary/10 transition-all" placeholder="john@example.com" required="" type="email">
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-label-lg text-on-surface ml-1">Rating</label>
+<select class="bg-white/60 border border-outline-variant/30 rounded-xl px-5 py-3 focus:ring-2 focus:ring-primary/10 transition-all appearance-none cursor-pointer">
+<option value="5">5 Stars - Excellent</option>
+<option value="4">4 Stars - Very Good</option>
+<option value="3">3 Stars - Good</option>
+<option value="2">2 Stars - Fair</option>
+<option value="1">1 Star - Poor</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-label-lg text-on-surface ml-1">Your Message</label>
+<textarea class="bg-white/60 border border-outline-variant/30 rounded-xl px-5 py-3 focus:ring-2 focus:ring-primary/10 transition-all resize-none" placeholder="Tell us what you think..." required="" rows="4"></textarea>
+</div>
+<div class="md:col-span-2 flex flex-col items-center gap-4 mt-4">
+<button class="w-full md:w-auto bg-primary text-on-primary px-12 py-4 rounded-xl font-label-lg text-label-lg shadow-xl shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all" type="submit">
+                            Submit Review
+                        </button>
+<!-- Success Message Placeholder -->
+<div class="hidden flex items-center gap-2 text-secondary font-medium mt-2 animate-bounce" id="reviewSuccess">
+<span class="material-symbols-outlined">check_circle</span>
+                            Thank you! Your review has been submitted.
+                        </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest/50 backdrop-blur-xl w-full py-16 border-t border-white/40">
+<div class="max-w-container-max-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-2 flex flex-col gap-6">
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">Founder</span>
+<p class="text-body-md text-on-surface-variant max-w-sm leading-relaxed">
+                    Making lost and found simple, secure, and community-driven. Empowering organizations to build trust through integrity.
+                </p>
+<p class="text-label-sm text-outline">© 2024 Founder Lost &amp; Found. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-primary uppercase tracking-widest text-[11px]">Quick Links</h4>
+<div class="flex flex-col gap-3">
+<a class="text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Privacy Policy</a>
+<a class="text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Terms of Service</a>
+<a class="text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Community Guidelines</a>
+<a class="text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="Home.html">Support Center</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-primary uppercase tracking-widest text-[11px]">Contact Us</h4>
+<div class="flex flex-col gap-3 mb-6">
+<p class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">phone</span> +91 90000 12345
+                    </p>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span> support@founder.io
+                    </p>
+</div>
+<div class="flex gap-4">
+<button onclick="window.location.href='Login.html'" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all text-primary">
+<span class="material-symbols-outlined text-lg">share</span>
+</button>
+<button onclick="window.location.href='Login.html'" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all text-primary">
+<span class="material-symbols-outlined text-lg">public</span>
+</button>
+<button onclick="window.location.href='Login.html'" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all text-primary">
+<span class="material-symbols-outlined text-lg">alternate_email</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Search bar interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('w-80');
+            searchInput.classList.add('bg-white');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('w-80');
+            searchInput.classList.remove('bg-white');
+        });
+
+        // Review Form Submission
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewSuccess = document.getElementById('reviewSuccess');
+
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputs = reviewForm.querySelectorAll('input, select, textarea');
+                const body = new URLSearchParams({
+                    review_name: inputs[0]?.value || '',
+                    review_email: inputs[1]?.value || '',
+                    review_rating: inputs[2]?.value || '5',
+                    review_message: inputs[3]?.value || ''
+                });
+
+                fetch('/Home.html', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'fetch' },
+                    body
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (!data.ok) {
+                        throw new Error(data.message || 'Review submission failed.');
+                    }
+                    reviewSuccess.classList.remove('hidden');
+                    reviewForm.reset();
+                    setTimeout(() => {
+                        reviewSuccess.classList.add('hidden');
+                    }, 5000);
+                })
+                .catch(() => {
+                    reviewSuccess.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+
+
+<script src="site-actions.js"></script>
+</body></html>
